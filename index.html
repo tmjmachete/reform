@@ -650,6 +650,48 @@ body {
   .signup-btn { width: 100%; }
 }
 
+
+/* ── Signup success popup ── */
+.signup-popup {
+  display: none;
+  position: fixed;
+  bottom: var(--sp-4); right: var(--sp-4);
+  background: var(--navy);
+  border: 1px solid var(--gold);
+  border-left: 4px solid var(--gold-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: 4px;
+  z-index: 500;
+  max-width: 320px;
+  box-shadow: 0 8px 32px oklch(18% 0.02 60 / 0.3);
+  animation: slideUp 0.3s ease;
+}
+.signup-popup.show { display: block; }
+.signup-popup-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600;
+  color: white; margin-bottom: 4px;
+}
+.signup-popup-msg {
+  font-family: 'Lora', serif;
+  font-size: 14px; font-style: italic;
+  color: oklch(70% 0.025 240); line-height: 1.5;
+}
+.signup-popup-close {
+  position: absolute; top: 10px; right: 14px;
+  background: none; border: none;
+  color: oklch(55% 0.02 240); font-size: 18px;
+  cursor: pointer; line-height: 1;
+}
+.signup-popup-close:hover { color: white; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media(max-width:520px) {
+  .signup-popup { left: var(--sp-3); right: var(--sp-3); bottom: var(--sp-3); max-width:none; }
+}
+
 </style>
 </head>
 <body>
@@ -865,5 +907,32 @@ body {
 
 </div>
 <script src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+
+<!-- Signup success popup -->
+<div class="signup-popup" id="signupPopup" role="alert" aria-live="polite">
+  <button class="signup-popup-close" onclick="document.getElementById('signupPopup').classList.remove('show')" aria-label="Close">&times;</button>
+  <div class="signup-popup-title">You are in. &#10003;</div>
+  <div class="signup-popup-msg">Welcome to the re:form community. New notes and journal entries coming your way.</div>
+</div>
+
+<script>
+// Show popup on successful Mailchimp redirect
+(function() {
+  var form = document.getElementById('mc-embedded-subscribe-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    var email = document.getElementById('mce-EMAIL');
+    if (email && email.value && email.validity.valid) {
+      setTimeout(function() {
+        document.getElementById('signupPopup').classList.add('show');
+        setTimeout(function() {
+          document.getElementById('signupPopup').classList.remove('show');
+        }, 6000);
+      }, 1200);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
