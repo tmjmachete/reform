@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reform Journal — An Extension of the re:form Podcast</title>
+<meta name="description" content="An honest conversation about faith, life, and finding our way back. A journal by re:form.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --ink-light: #4a4035;
+    --gold: #C9933A;
+    --gold-text: #8A5E1A;
+    --gold-soft: #e8c07a;
+    --gold-tint: rgba(201, 147, 58, 0.1);
+    --gold-accent: rgba(201, 147, 58, 0.15);
+    --cream: #faf7f2;
+    --cream-deep: #f0ebe0;
+    --blue-deep: #1B3A5C;
+    --blue-mid: #2D6A9F;
+    --rule: #d6cfc4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 8px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    z-index: 999;
+  }
+  .skip-link:focus { top: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── Hero masthead ── */
+  .site-hero {
+    background: var(--blue-deep);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .site-hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+
+  .site-hero::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-accent);
+  }
+
+  .brand-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 20px;
+    opacity: 0.85;
+  }
+
+  .site-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 9vw, 56px);
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+
+  .site-name em {
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+
+  .site-tagline {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: clamp(15px, 3.5vw, 18px);
+    color: rgba(255,255,255,0.65);
+    max-width: 400px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+  }
+
+  .site-rule {
+    width: 36px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 18px;
+  }
+
+  .site-podcast-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .site-podcast-note strong {
+    color: var(--gold-soft);
+    font-weight: 500;
+  }
+
+  /* ── Posts section ── */
+  .posts-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 52px 20px 80px;
+  }
+
+  .posts-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── Post card ── */
+  .post-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: opacity 0.2s ease;
+  }
+
+  .post-card:first-of-type {
+    padding-top: 0;
+  }
+
+  .post-card:active { opacity: 0.7; }
+
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post-issue {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    background: var(--gold-tint);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .post-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.05em;
+  }
+
+  .post-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 28px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .post-card-title em {
+    font-style: italic;
+    color: var(--blue-deep);
+  }
+
+  .post-card-excerpt {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .post-card-read {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .post-card-read::after {
+    content: '→';
+    transition: transform 0.2s ease;
+  }
+
+  .post-card:hover .post-card-read::after {
+    transform: translateX(4px);
+  }
+
+  .post-card:focus-visible {
+    outline: 2px solid var(--gold-text);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Latest badge on first card */
+  .post-card.latest .post-card-title {
+    font-size: clamp(26px, 6vw, 34px);
+  }
+
+  /* ── About strip ── */
+  .about-strip {
+    background: var(--cream-deep);
+    border-top: 1px solid var(--rule);
+    padding: 44px 24px;
+    text-align: center;
+  }
+
+  .about-strip-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+    margin-bottom: 14px;
+  }
+
+  .about-strip-text {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: clamp(16px, 3.5vw, 19px);
+    color: var(--ink-light);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 20px;
+  }
+
+  .about-strip-podcast {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+  }
+
+  .about-strip-podcast strong {
+    font-weight: 700;
+    color: var(--gold-text);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 28px 24px 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--rule);
+    background: var(--cream);
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold-text);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .site-hero      { animation: fadeUp 0.7s ease both; }
+    .posts-section  { animation: fadeUp 0.8s 0.1s ease both; }
+    .about-strip    { animation: fadeUp 0.9s 0.2s ease both; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Hero -->
+<header class="site-hero">
+  <div class="brand-label">An Extension of the re:form Podcast</div>
+  <h1 class="site-name">Reform<br><em>Journal</em></h1>
+  <p class="site-tagline">An honest conversation about faith, life, and finding our way back.</p>
+  <div class="site-rule"></div>
+  <div class="site-podcast-note">Part of the <strong>re:form</strong> family</div>
+</header>
+
+<main id="main-content">
+
+<!-- Posts -->
+<section class="posts-section" aria-labelledby="posts-heading">
+  <h2 class="posts-heading" id="posts-heading">Journal Entries</h2>
+
+  <!-- Post 1 — latest -->
+  <a class="post-card latest" href="/posts/the-mirror-moment.html">
+    <div class="post-card-meta">
+      <span class="post-issue">Issue No. 01</span>
+      <span class="post-date">May 2026</span>
+    </div>
+    <h3 class="post-card-title">The <em>Mirror</em> Moment</h3>
+    <p class="post-card-excerpt">What happens when you stop, look honestly at yourself, and decide you are tired of what you see. A journey from brokenness to belonging — and the God who meets us exactly where we are.</p>
+    <span class="post-card-read">Read the entry</span>
+  </a>
+
+  <!-- Future posts will go here -->
+
+</section>
+
+<!-- About -->
+<div class="about-strip">
+  <div class="about-strip-label">About This Journal</div>
+  <p class="about-strip-text">Reform Journal is a written space for the conversations we keep having on the podcast — about faith, about failing, about finding our way back to God. New entries posted weekly.</p>
+  <div class="about-strip-podcast">Listen on the <strong>re:form</strong> Podcast</div>
+</div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-brand">re:form</div>
+  <div>Reform Journal &nbsp;·&nbsp; Finding our way back, one honest step at a time.</div>
+</footer>
+
+</body>
+</html>
