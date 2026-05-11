@@ -556,6 +556,100 @@ body {
   .ep-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-2); }
 }
 
+
+/* ── MAILING LIST SIGNUP ── */
+.signup-section {
+  background: var(--navy);
+  padding: var(--sp-7) var(--sp-4);
+  border-top: 2px solid var(--gold);
+}
+.signup-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.signup-inner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-2);
+  line-height: 1.2;
+}
+.signup-inner p {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: var(--t-base);
+  color: oklch(70% 0.025 240);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+  max-width: 48ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.signup-form {
+  display: flex;
+  gap: var(--sp-2);
+  max-width: 480px;
+  margin: 0 auto var(--sp-3);
+}
+.signup-input {
+  flex: 1;
+  font-family: 'Lora', serif;
+  font-size: var(--t-base);
+  padding: 13px var(--sp-3);
+  border: 1px solid oklch(40% 0.04 240);
+  background: oklch(25% 0.04 240);
+  color: var(--paper);
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.18s ease;
+}
+.signup-input::placeholder {
+  color: oklch(55% 0.02 240);
+}
+.signup-input:focus {
+  border-color: var(--gold-2);
+}
+.signup-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold-2);
+  border: none;
+  padding: 13px var(--sp-4);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.18s ease;
+  white-space: nowrap;
+}
+.signup-btn:hover { background: var(--gold); }
+.signup-btn:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+.signup-note {
+  font-family: 'DM Mono', monospace;
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  color: oklch(45% 0.02 240);
+}
+.signup-success {
+  display: none;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: var(--t-base);
+  color: var(--gold-2);
+  padding: var(--sp-3);
+}
+/* Honeypot — hidden from humans */
+.mc-honeypot { position: absolute; left: -5000px; }
+
+@media (max-width: 520px) {
+  .signup-form { flex-direction: column; }
+  .signup-btn { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -712,6 +806,43 @@ body {
   </div>
 </section>
 
+
+<!-- ── MAILING LIST ── -->
+<section class="signup-section" aria-labelledby="signup-heading">
+  <div class="signup-inner">
+    <span class="label">Stay Connected</span>
+    <span class="rule" style="margin: var(--sp-2) auto;"></span>
+    <h2 id="signup-heading">Get new notes and journal entries in your inbox.</h2>
+    <p>Every week — new study notes from Learn of God and new journal entries from Reform Journal, delivered directly to you.</p>
+    <form
+      action="https://app.us1.list-manage.com/subscribe/post?u=c37224899c4a3e63342089f41&amp;id=f7c9123d6c&amp;f_id=00fff2e0f0"
+      method="post"
+      id="mc-embedded-subscribe-form"
+      name="mc-embedded-subscribe-form"
+      class="signup-form"
+      target="_blank"
+      novalidate
+      aria-label="Email signup form">
+      <input
+        type="email"
+        name="EMAIL"
+        id="mce-EMAIL"
+        class="signup-input"
+        placeholder="Your email address"
+        required
+        aria-label="Email address">
+      <!-- Mailchimp honeypot — do not remove -->
+      <div class="mc-honeypot" aria-hidden="true">
+        <input type="text" name="b_c37224899c4a3e63342089f41_f7c9123d6c" tabindex="-1" value="">
+      </div>
+      <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="signup-btn">
+        Subscribe
+      </button>
+    </form>
+    <p class="signup-note">No spam. Unsubscribe at any time.</p>
+  </div>
+</section>
+
 <!-- ── FOOTER ── -->
 <footer class="page-footer" role="contentinfo">
   <div class="fi">
@@ -733,5 +864,6 @@ body {
 </footer>
 
 </div>
+<script src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
 </body>
 </html>
