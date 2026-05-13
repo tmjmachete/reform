@@ -106,6 +106,31 @@
   .belief-card.available{cursor:pointer;}
   .belief-card.available:hover{opacity:.75;transform:translateX(4px);}
   .belief-card.soon{opacity:.45;cursor:default;}
+  /* Currently studying */
+  .belief-card.current{
+    background:oklch(97% 0.018 65);
+    border-bottom:1px solid var(--gold);
+    border-top:1px solid var(--gold);
+  }
+  .belief-card.current::before{
+    border-color:var(--gold);
+    background:var(--gold);
+    box-shadow:0 0 0 5px oklch(48% 0.10 65 / 0.25);
+    width:24px;height:24px;
+    left:-60px;
+  }
+  .belief-card.current .bc-title{color:var(--gold);}
+  .belief-card.current:hover{opacity:.85;transform:translateX(4px);}
+  .bc-current-label{
+    font-family:'DM Mono',monospace;
+    font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-top:3px;
+  }
+  @media(max-width:600px){
+    .belief-card.current::before{left:-44px;width:18px;height:18px;}
+  }
 
   /* Pin on road */
   .belief-card::before{
@@ -164,7 +189,7 @@
     height:100%;
     background:linear-gradient(to right, var(--gold), var(--gold-2));
     border-radius:2px;
-    width:50%;
+    width:100%;
     transition:width .5s ease;
   }
   .progress-label{
@@ -386,11 +411,12 @@
           <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/remnant-mission" class="belief-card available" data-cat="The Church" aria-label="Belief 13: The Remnant &amp; Its Mission">
+      <a href="/notes/remnant-mission" class="belief-card available current" data-current="true" data-cat="The Church" aria-label="Belief 13: The Remnant &amp; Its Mission">
         <div class="bc-num" style="color:oklch(60% 0.15 300)">13</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
           <div class="bc-title">The Remnant &amp; Its Mission</div>
+          <span class="bc-current-label">Currently Studying</span>
         </div>
         <div class="bc-status">
           <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
