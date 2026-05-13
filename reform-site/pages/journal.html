@@ -1,15 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reform Journal &mdash; re:form</title><meta name="description" content="re:form &mdash; A Seventh-day Adventist platform for Bible study, reflection, and drawing closer to God."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reform Journal &mdash; re:form</title><meta name="description" content="re:form &mdash; A Seventh-day Adventist platform for Bible study, reflection, and drawing closer to God."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400&display=swap" rel="stylesheet"><style>
   :root {
-    --navy:#12233A; --navy-2:#1D3352;
-    --gold:#B8892A; --gold-2:#D4A84B;
-    --ink:#1C1812; --ink-2:#3D3530;
-    --paper:#F6F2EA; --paper-2:#EDE7D9;
-    --rule:#D5CABC; --white:#FDFAF5;
-    --nav-h:60px;
+    --navy:    oklch(20% 0.04 240);
+    --navy-2:  oklch(26% 0.05 240);
+    --gold:    oklch(48% 0.10 65);
+    --gold-2:  oklch(66% 0.13 65);
+    --gold-bg: oklch(48% 0.10 65 / 0.12);
+    --paper:   oklch(97% 0.010 80);
+    --paper-2: oklch(93% 0.015 80);
+    --ink:     oklch(18% 0.020 60);
+    --ink-2:   oklch(42% 0.018 60);
+    --ink-3:   oklch(58% 0.015 60);
+    --rule:    oklch(82% 0.012 80);
+    --focus:   oklch(55% 0.18 240);
+    --nav-h:   64px;
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-  body{background:var(--white);color:var(--ink);font-family:'Libre Baskerville',Georgia,serif;font-size:17px;line-height:1.75;}
+  body{background:var(--paper);color:var(--ink);font-family:'Lora',Georgia,serif;font-size:17px;line-height:1.75;}
   .nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:300;background:var(--navy);display:flex;align-items:center;padding:0 28px;border-bottom:2px solid var(--gold);}
   .nav-logo{display:flex;align-items:center;text-decoration:none;margin-right:auto;}
   .nav-logo img{height:28px;width:auto;filter:invert(1) brightness(1.8);opacity:.9;}
@@ -44,7 +51,7 @@
 .ph{background:var(--navy);padding:80px 28px 64px;position:relative;}
 .ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);}
 .ph-in{max-width:760px;margin:0 auto;}
-.ph h1{font-family:'Instrument Serif',serif;font-size:clamp(36px,7vw,58px);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:16px;letter-spacing:-.02em;}
+.ph h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,58px);font-weight:600;color:var(--navy-2);line-height:1.1;margin-bottom:16px;letter-spacing:-.02em;color:white;}
 .ph h1 em{font-style:italic;color:var(--gold-2);}
 .ph p{font-size:15px;color:rgba(255,255,255,.55);font-style:italic;line-height:1.75;max-width:52ch;}
 .j-sec{max-width:760px;margin:0 auto;padding:64px 28px 80px;}
@@ -54,7 +61,7 @@
 .feat-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
 .feat-issue{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
 .feat-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--ink-2);}
-.feat-title{font-family:'Instrument Serif',serif;font-size:clamp(26px,5vw,38px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,38px);font-weight:600;color:var(--navy);line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
 .feat-title em{font-style:italic;}
 .feat-exc{font-size:15px;color:var(--ink-2);font-style:italic;line-height:1.7;margin-bottom:20px;max-width:58ch;}
 .feat-read{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:2px;display:inline-block;}
@@ -62,8 +69,8 @@
 .entry{display:grid;grid-template-columns:56px 1fr auto;gap:20px;align-items:center;padding:22px 0;border-top:1px solid var(--rule);text-decoration:none;color:inherit;transition:opacity .18s;}
 .entry:hover{opacity:.7;}
 .entry:last-of-type{border-bottom:1px solid var(--rule);}
-.entry-num{font-family:'Instrument Serif',serif;font-size:28px;color:var(--rule);text-align:right;line-height:1;}
-.entry-title{font-family:'Instrument Serif',serif;font-size:clamp(16px,3vw,20px);color:var(--navy);}
+.entry-num{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--rule);text-align:right;line-height:1;}
+.entry-title{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);color:var(--navy);}
 .entry-arrow{font-family:'DM Mono',monospace;font-size:16px;color:var(--rule);}
 .coming{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--rule);margin-top:40px;}
 @media(max-width:600px){
