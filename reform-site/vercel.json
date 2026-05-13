@@ -1,11 +1,13 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/learn",   "destination": "/pages/learn",   "permanent": false },
+    { "source": "/journal", "destination": "/pages/journal", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/learn",         "destination": "/pages/learn.html" },
-    { "source": "/journal",       "destination": "/pages/journal.html" },
-    { "source": "/posts/:slug",   "destination": "/posts/:slug.html" },
-    { "source": "/notes/:slug",   "destination": "/notes/:slug.html" }
+    { "source": "/posts/:slug", "destination": "/posts/:slug.html" },
+    { "source": "/notes/:slug", "destination": "/notes/:slug.html" }
   ],
   "headers": [
     {
