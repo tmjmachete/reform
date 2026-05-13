@@ -6,8 +6,8 @@
     { "source": "/journal", "destination": "/pages/journal", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/posts/:slug", "destination": "/posts/:slug.html" },
-    { "source": "/notes/:slug", "destination": "/notes/:slug.html" }
+    { "source": "/posts/:slug",        "destination": "/posts/:slug.html" },
+    { "source": "/notes/:slug((?!.*\\.pdf).*)", "destination": "/notes/:slug.html" }
   ],
   "headers": [
     {
@@ -21,7 +21,6 @@
     {
       "source": "/notes/(.*\\.pdf)",
       "headers": [
-        { "key": "Content-Type",        "value": "application/pdf" },
         { "key": "Content-Disposition", "value": "inline" },
         { "key": "Cache-Control",       "value": "public, max-age=86400" }
       ]
