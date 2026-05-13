@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Belief 13: The Remnant and Its Mission &mdash; re:form Learn of God</title>
+<title>Belief 13: The Remnant and Its Mission — re:form Learn of God</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -38,9 +38,8 @@
   .scripture{background:var(--paper-2);border-left:4px solid var(--gold);padding:18px 22px;margin:24px 0;border-radius:0 4px 4px 0;}
   .scripture-ref{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
   .scripture-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;line-height:1.65;color:var(--navy);}
-  .stc{background:oklch(91% 0.012 80);border-left:4px solid oklch(55% 0.08 65);padding:18px 22px;margin:24px 0;border-radius:0 4px 4px 0;}
-  .stc-source{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:oklch(45% 0.06 65);margin-bottom:8px;display:block;}
-  .stc-text{font-family:'Lora',serif;font-style:italic;font-size:15.5px;line-height:1.7;color:var(--ink);}
+
+  /* ── Study Guides section ── */
   .guides-section{margin-top:48px;padding-top:36px;border-top:1px solid var(--rule);}
   .guides-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px;flex-wrap:wrap;gap:8px;}
   .guides-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--navy);letter-spacing:-.01em;}
@@ -56,7 +55,10 @@
   .btn-read:hover{background:var(--navy-2);}
   .btn-download{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:var(--navy);text-decoration:none;padding:9px 18px;border:1px solid var(--rule);border-radius:2px;transition:border-color .15s,color .15s;white-space:nowrap;}
   .btn-download:hover{border-color:var(--navy);color:var(--navy);}
+
   .note-nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0;border-top:1px solid var(--rule);margin-top:48px;flex-wrap:wrap;gap:16px;}
+  .note-nav-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--gold);text-decoration:none;transition:color .15s;}
+  .note-nav-link:hover{color:var(--ink);}
   .back-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:28px;transition:color .15s;}
   .back-link:hover{color:var(--gold);}
   .page-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:32px 24px;font-family:'Lora',serif;font-size:15px;}
@@ -66,39 +68,21 @@
   .fr a{color:oklch(66% 0.13 65);text-decoration:none;}
   .fd{border:none;border-top:1px solid rgba(255,255,255,.08);margin:18px 0 12px;}
   .fb{max-width:700px;margin:0 auto;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.25);}
-  @media(max-width:600px){.note-body,.ph{padding-left:20px;padding-right:20px;}.fi{flex-direction:column;}.fr p{text-align:left;}.guide-item{flex-direction:column;gap:16px;}.guide-num{font-size:24px;min-width:auto;}}
+  @media(max-width:600px){
+    .note-body,.ph{padding-left:20px;padding-right:20px;}
+    .fi{flex-direction:column;}
+    .fr p{text-align:left;}
+    .guide-item{flex-direction:column;gap:16px;}
+    .guide-actions{flex-direction:row;}
+    .guide-num{font-size:24px;min-width:auto;}
+  }
 </style>
 </head>
 <body>
+
 <nav class="nav">
   <a class="nav-logo" href="/"><img src="/assets/logo.png" alt="re:form"></a>
   <div class="nav-links">
-    <a href="/">Home</a>
-    <a href="/learn" class="active">Learn of God</a>
-    <a href="/journal">Reform Journal</a>
-  </div>
-  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"
-    onclick="var m=document.getElementById('mm'),o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="mob" id="mm">
-  <a href="/">Home</a>
-  <a href="/learn" class="active">Learn of God</a>
-  <a href="/journal">Reform Journal</a>
-</div>
-<div class="page-body">
-  <div class="ph">
-    <div class="ph-in">
-      <div class="belief-num">13</div>
-      <span class="belief-cat">The Church</span>
-      <h1 class="belief-title">The Remnant &amp; Its Mission</h1>
-    </div>
-  </div>
-  <section class="note-body">
-    <a class="back-link" href="/learn">&larr; Back to all beliefs</a>
-
-<div class="nav-links">
     <a href="/">Home</a>
     <a href="/learn" class="active">Learn of God</a>
     <a href="/journal">Reform Journal</a>
@@ -204,6 +188,18 @@
         </div>
       </div>
 
+      <div class="guide-item">
+        <div class="guide-num">05</div>
+        <div class="guide-info">
+          <div class="guide-name">How Will God Judge?</div>
+          <div class="guide-desc">The standard of judgment &middot; The three books of heaven &middot; The sanctuary blueprint &middot; Revelation 14:7</div>
+        </div>
+        <div class="guide-actions">
+          <a class="btn-read" href="/notes/Lesson5_HowWillGodJudge" target="_blank">Read</a>
+          <a class="btn-download" href="/notes/Lesson5_HowWillGodJudge__2_.pdf" download>Download</a>
+        </div>
+      </div>
+
     </div>
     <!-- end Study Guides -->
 
@@ -228,5 +224,6 @@
     <div class="fb">&copy; re:form &middot; A Seventh-day Adventist Ministry</div>
   </footer>
 </div>
+
 </body>
 </html>
