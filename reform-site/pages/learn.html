@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn of God — 28 Fundamental Beliefs — re:form</title>
 <meta name="description" content="A journey through the 28 Fundamental Beliefs of the Seventh-day Adventist Church. Study notes, scripture, and reflection for every belief.">
@@ -106,31 +108,6 @@
   .belief-card.available{cursor:pointer;}
   .belief-card.available:hover{opacity:.75;transform:translateX(4px);}
   .belief-card.soon{opacity:.45;cursor:default;}
-  /* Currently studying */
-  .belief-card.current{
-    background:oklch(97% 0.018 65);
-    border-bottom:1px solid var(--gold);
-    border-top:1px solid var(--gold);
-  }
-  .belief-card.current::before{
-    border-color:var(--gold);
-    background:var(--gold);
-    box-shadow:0 0 0 5px oklch(48% 0.10 65 / 0.25);
-    width:24px;height:24px;
-    left:-60px;
-  }
-  .belief-card.current .bc-title{color:var(--gold);}
-  .belief-card.current:hover{opacity:.85;transform:translateX(4px);}
-  .bc-current-label{
-    font-family:'DM Mono',monospace;
-    font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--gold);
-    display:block;
-    margin-top:3px;
-  }
-  @media(max-width:600px){
-    .belief-card.current::before{left:-44px;width:18px;height:18px;}
-  }
 
   /* Pin on road */
   .belief-card::before{
@@ -189,7 +166,7 @@
     height:100%;
     background:linear-gradient(to right, var(--gold), var(--gold-2));
     border-radius:2px;
-    width:100%;
+    width:50%;
     transition:width .5s ease;
   }
   .progress-label{
@@ -284,23 +261,23 @@
   <!-- Progress -->
   <div class="progress-bar">
     <div class="progress-track"><div class="progress-fill"></div></div>
-    <div class="progress-label">28 of 28 beliefs available</div>
+    <div class="progress-label">14 of 28 beliefs available</div>
   </div>
 
   <!-- Roadmap -->
   <section class="roadmap" aria-label="28 Fundamental Beliefs roadmap">
     <div class="road-track" id="roadTrack">
       
-      <a href="/notes/holy-scriptures" class="belief-card available" data-cat="God" aria-label="Belief 1: The Holy Scriptures">
+      <div class="belief-card soon" data-cat="God" aria-label="Belief 1: The Holy Scriptures">
         <div class="bc-num" style="color:oklch(66% 0.13 65)">01</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(66% 0.13 65)">God</div>
           <div class="bc-title">The Holy Scriptures</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(66% 0.13 65)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
       <a href="/notes/trinity" class="belief-card available" data-cat="God" aria-label="Belief 2: The Trinity">
         <div class="bc-num" style="color:oklch(66% 0.13 65)">02</div>
         <div class="bc-body">
@@ -341,16 +318,16 @@
           <span class="bc-dot available" style="background:oklch(66% 0.13 65)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/creation" class="belief-card available" data-cat="Humanity" aria-label="Belief 6: Creation">
+      <div class="belief-card soon" data-cat="Humanity" aria-label="Belief 6: Creation">
         <div class="bc-num" style="color:oklch(60% 0.15 240)">06</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 240)">Humanity</div>
           <div class="bc-title">Creation</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 240)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
       <a href="/notes/nature-of-humanity" class="belief-card available" data-cat="Humanity" aria-label="Belief 7: The Nature of Humanity">
         <div class="bc-num" style="color:oklch(60% 0.15 240)">07</div>
         <div class="bc-body">
@@ -371,157 +348,156 @@
           <span class="bc-dot available" style="background:oklch(60% 0.15 240)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/life-death-resurrection-of-christ" class="belief-card available" data-cat="Humanity" aria-label="Belief 9: The Life, Death &amp; Resurrection of Christ">
+      <div class="belief-card soon" data-cat="Humanity" aria-label="Belief 9: The Life, Death & Resurrection">
         <div class="bc-num" style="color:oklch(60% 0.15 240)">09</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 240)">Humanity</div>
-          <div class="bc-title">The Life, Death &amp; Resurrection of Christ</div>
+          <div class="bc-title">The Life, Death & Resurrection</div>
+        </div>
+        <div class="bc-status">
+          <span class="bc-dot soon"></span>
+        </div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <a href="/notes/law-of-god" class="belief-card available" data-cat="Humanity" aria-label="Belief 10: The Law of God">
+        <div class="bc-num" style="color:oklch(60% 0.15 240)">10</div>
+        <div class="bc-body">
+          <div class="bc-cat" style="color:oklch(60% 0.15 240)">Humanity</div>
+          <div class="bc-title">The Law of God</div>
         </div>
         <div class="bc-status">
           <span class="bc-dot available" style="background:oklch(60% 0.15 240)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/experience-of-salvation" class="belief-card available" data-cat="Salvation" aria-label="Belief 10: The Experience of Salvation">
-        <div class="bc-num" style="color:oklch(58% 0.15 150)">10</div>
-        <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
-          <div class="bc-title">The Experience of Salvation</div>
-        </div>
-        <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(58% 0.15 150)"></span>
-        </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/growing-in-christ" class="belief-card available" data-cat="Salvation" aria-label="Belief 11: Growing in Christ">
+      <a href="/notes/sabbath" class="belief-card available" data-cat="Salvation" aria-label="Belief 11: The Sabbath">
         <div class="bc-num" style="color:oklch(58% 0.15 150)">11</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
-          <div class="bc-title">Growing in Christ</div>
+          <div class="bc-title">The Sabbath</div>
         </div>
         <div class="bc-status">
           <span class="bc-dot available" style="background:oklch(58% 0.15 150)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/the-church" class="belief-card available" data-cat="The Church" aria-label="Belief 12: The Church">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">12</div>
+      <div class="belief-card soon" data-cat="Salvation" aria-label="Belief 12: Stewardship">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">12</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
-          <div class="bc-title">The Church</div>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
+          <div class="bc-title">Stewardship</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/remnant-mission" class="belief-card available current" data-current="true" data-cat="The Church" aria-label="Belief 13: The Remnant &amp; Its Mission">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">13</div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <a href="/notes/remnant-mission" class="belief-card available" data-cat="Salvation" aria-label="Belief 13: The Remnant & Its Mission">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">13</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
-          <div class="bc-title">The Remnant &amp; Its Mission</div>
-          <span class="bc-current-label">Currently Studying</span>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
+          <div class="bc-title">The Remnant & Its Mission</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot available" style="background:oklch(58% 0.15 150)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/unity-in-the-body" class="belief-card available" data-cat="The Church" aria-label="Belief 14: Unity in the Body of Christ">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">14</div>
+      <div class="belief-card soon" data-cat="Salvation" aria-label="Belief 14: Unity in the Body of Christ">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">14</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
           <div class="bc-title">Unity in the Body of Christ</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/baptism" class="belief-card available" data-cat="The Church" aria-label="Belief 15: Baptism">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">15</div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Salvation" aria-label="Belief 15: Baptism">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">15</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
           <div class="bc-title">Baptism</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/lords-supper" class="belief-card available" data-cat="The Church" aria-label="Belief 16: The Lord&apos;s Supper">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">16</div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Salvation" aria-label="Belief 16: The Lord's Supper">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">16</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
-          <div class="bc-title">The Lord&apos;s Supper</div>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
+          <div class="bc-title">The Lord's Supper</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/spiritual-gifts-and-ministries" class="belief-card available" data-cat="The Church" aria-label="Belief 17: Spiritual Gifts &amp; Ministries">
-        <div class="bc-num" style="color:oklch(60% 0.15 300)">17</div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Salvation" aria-label="Belief 17: Spiritual Gifts & Ministries">
+        <div class="bc-num" style="color:oklch(58% 0.15 150)">17</div>
         <div class="bc-body">
-          <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
-          <div class="bc-title">Spiritual Gifts &amp; Ministries</div>
+          <div class="bc-cat" style="color:oklch(58% 0.15 150)">Salvation</div>
+          <div class="bc-title">Spiritual Gifts & Ministries</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/gift-of-prophecy" class="belief-card available" data-cat="The Church" aria-label="Belief 18: The Gift of Prophecy">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="The Church" aria-label="Belief 18: The Gift of Prophecy">
         <div class="bc-num" style="color:oklch(60% 0.15 300)">18</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
           <div class="bc-title">The Gift of Prophecy</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/law-of-god" class="belief-card available" data-cat="The Church" aria-label="Belief 19: The Law of God">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="The Church" aria-label="Belief 19: The Law of God">
         <div class="bc-num" style="color:oklch(60% 0.15 300)">19</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
           <div class="bc-title">The Law of God</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/sabbath" class="belief-card available" data-cat="The Church" aria-label="Belief 20: The Sabbath">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="The Church" aria-label="Belief 20: The Sabbath">
         <div class="bc-num" style="color:oklch(60% 0.15 300)">20</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(60% 0.15 300)">The Church</div>
           <div class="bc-title">The Sabbath</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(60% 0.15 300)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/stewardship" class="belief-card available" data-cat="Christian Life" aria-label="Belief 21: Stewardship">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Christian Life" aria-label="Belief 21: Stewardship">
         <div class="bc-num" style="color:oklch(62% 0.15 20)">21</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(62% 0.15 20)">Christian Life</div>
           <div class="bc-title">Stewardship</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(62% 0.15 20)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/christian-behavior" class="belief-card available" data-cat="Christian Life" aria-label="Belief 22: Christian Behaviour">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Christian Life" aria-label="Belief 22: Christian Behaviour">
         <div class="bc-num" style="color:oklch(62% 0.15 20)">22</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(62% 0.15 20)">Christian Life</div>
           <div class="bc-title">Christian Behaviour</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(62% 0.15 20)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/marriage-and-the-family" class="belief-card available" data-cat="Christian Life" aria-label="Belief 23: Marriage &amp; the Family">
+      </div><div class="bc-connector" aria-hidden="true"></div>
+      <div class="belief-card soon" data-cat="Christian Life" aria-label="Belief 23: Marriage & the Family">
         <div class="bc-num" style="color:oklch(62% 0.15 20)">23</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(62% 0.15 20)">Christian Life</div>
-          <div class="bc-title">Marriage &amp; the Family</div>
+          <div class="bc-title">Marriage & the Family</div>
         </div>
         <div class="bc-status">
-          <span class="bc-dot available" style="background:oklch(62% 0.15 20)"></span>
+          <span class="bc-dot soon"></span>
         </div>
-      </a><div class="bc-connector" aria-hidden="true"></div>
+      </div><div class="bc-connector" aria-hidden="true"></div>
       <a href="/notes/sanctuary" class="belief-card available" data-cat="Last Day Events" aria-label="Belief 24: Christ's Ministry in Sanctuary">
         <div class="bc-num" style="color:oklch(55% 0.12 240)">24</div>
         <div class="bc-body">
@@ -532,7 +508,7 @@
           <span class="bc-dot available" style="background:oklch(55% 0.12 240)"></span>
         </div>
       </a><div class="bc-connector" aria-hidden="true"></div>
-      <a href="/notes/second-coming-of-christ" class="belief-card available" data-cat="Last Day Events" aria-label="Belief 25: The Second Coming of Christ">
+      <a href="/notes/second-coming" class="belief-card available" data-cat="Last Day Events" aria-label="Belief 25: The Second Coming of Christ">
         <div class="bc-num" style="color:oklch(55% 0.12 240)">25</div>
         <div class="bc-body">
           <div class="bc-cat" style="color:oklch(55% 0.12 240)">Last Day Events</div>
