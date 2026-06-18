@@ -566,7 +566,24 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
 .post-prose .transform-note { background: var(--surface-soft); border-radius: var(--r-md); padding: var(--lg); margin: var(--xl) 0; }
 
 /* drop any nav/meta the original body embedded (we render our own) */
-.post-prose .post-nav, .post-prose .post-meta { display: none; }
+.post-prose .post-nav, .post-prose .post-meta, .post-prose .back-link { display: none; }
+
+/* belief-note study guides block */
+.post-prose .guides-section { margin: var(--xl) 0; padding: var(--lg); background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: var(--r-md); }
+.post-prose .guides-title { font-size: var(--title-md); font-weight: 500; color: var(--ink); }
+.post-prose .guides-note { font-size: var(--caption); color: var(--muted); margin-bottom: var(--sm); }
+.post-prose .guide-item { display: grid; grid-template-columns: 28px 1fr auto; gap: var(--md); align-items: center; padding: var(--sm) 0; border-top: 1px solid var(--hairline); }
+.post-prose .guide-num { font-size: var(--title-sm); font-weight: 500; color: var(--coral); }
+.post-prose .guide-name { font-size: var(--label-md); font-weight: 500; color: var(--ink); }
+.post-prose .guide-desc { font-size: var(--caption); color: var(--muted); }
+.post-prose .guide-actions { display: flex; gap: var(--xs); }
+.post-prose .btn-read, .post-prose .btn-download { font-size: var(--caption); font-weight: 500; padding: 6px 12px; border-radius: var(--r-sm); border: 1px solid var(--hairline); color: var(--ink); white-space: nowrap; }
+.post-prose .btn-download { background: var(--ink); color: #fff; border-color: var(--ink); }
+@media (max-width: 560px) { .post-prose .guide-item { grid-template-columns: 1fr; } }
+
+/* learn index — beliefs grouped by category */
+.belief-group { max-width: var(--maxw); margin: 0 auto var(--xl); }
+.belief-group h2 { font-size: var(--title-lg); color: var(--ink); margin-bottom: var(--sm); }
 
 .post-foot { max-width: 720px; margin: 0 auto; padding: 0 var(--xxl) var(--section); }
 @media (max-width: 768px) { .post-foot { padding: 0 var(--lg) var(--xxl); } }
