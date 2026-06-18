@@ -6,21 +6,15 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
 
-/**
- * Top navigation for the /school zone.
- *
- * Links to the main static site (Home, Learn, Journal) are plain <a> because
- * they leave the Next.js zone — basePath must NOT be prepended. Links that stay
- * inside /school use next/link, which auto-prepends basePath.
- */
+/** Brand-wide top navigation (whole re:form site + school). */
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [supabase] = useState(() => createClient());
   const [user, setUser] = useState<User | null>(null);
-  const pathname = usePathname(); // already stripped of basePath
+  const pathname = usePathname();
   const router = useRouter();
-  const coursesActive = pathname === '/' || pathname.startsWith('/courses');
-  const sessionsActive = pathname.startsWith('/sessions');
+
+  const is = (p: string) => (p === '/' ? pathname === '/' : pathname.startsWith(p));
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setUser(data.user));
@@ -37,26 +31,16 @@ export default function Nav() {
     router.refresh();
   };
 
-  const firstName = (user?.user_metadata?.full_name as string | undefined)?.split(' ')[0]
-    ?? user?.email?.split('@')[0];
+  const firstName =
+    (user?.user_metadata?.full_name as string | undefined)?.split(' ')[0] ?? user?.email?.split('@')[0];
 
-  const mainLinks = (
+  const links = (
     <>
-      <a href="/">Home</a>
-      <a href="/learn">Learn of God</a>
-      <a href="/journal">Reform Journal</a>
-      <Link href="/courses" className={coursesActive ? 'active' : undefined}>Courses</Link>
-      <Link href="/sessions" className={sessionsActive ? 'active' : undefined}>Live</Link>
+      <Link href="/" className={is('/') ? 'active' : undefined}>Home</Link>
+      <Link href="/learn" className={is('/learn') ? 'active' : undefined}>Learn of God</Link>
+      <Link href="/journal" className={is('/journal') ? 'active' : undefined}>Reform Journal</Link>
+      <Link href="/school" className={is('/school') ? 'active' : undefined}>School</Link>
     </>
-  );
-
-  const authControl = user ? (
-    <>
-      <Link href="/account" className="nav-user" title={user.email ?? undefined}>{firstName}</Link>
-      <button className="nav-signout" onClick={signOut}>Sign out</button>
-    </>
-  ) : (
-    <Link href="/login" className="nav-cta">Sign in</Link>
   );
 
   return (
@@ -64,13 +48,20 @@ export default function Nav() {
       <a href="#main" className="skip-link">Skip to main content</a>
 
       <nav className="nav" aria-label="Main navigation">
-        <Link className="nav-logo" href="/" aria-label="re:form School home">
-          <img src="/school/assets/logo.png" alt="re:form" />
+        <Link className="nav-logo" href="/" aria-label="re:form home">
+          <img src="/assets/logo.png" alt="re:form" />
         </Link>
 
         <div className="nav-links" role="menubar">
-          {mainLinks}
-          {authControl}
+          {links}
+          {user ? (
+            <>
+              <Link href="/school/account" className="nav-user" title={user.email ?? undefined}>{firstName}</Link>
+              <button className="nav-signout" onClick={signOut}>Sign out</button>
+            </>
+          ) : (
+            <Link href="/school/login" className="nav-cta">Sign in</Link>
+          )}
         </div>
 
         <button
@@ -83,15 +74,15 @@ export default function Nav() {
         </button>
       </nav>
 
-      <div className={`mob${open ? ' open' : ''}`} role="menu">
-        {mainLinks}
+      <div className={`mob${open ? ' open' : ''}`} role="menu" onClick={() => setOpen(false)}>
+        {links}
         {user ? (
           <>
-            <Link href="/account" onClick={() => setOpen(false)}>{firstName} — Account</Link>
+            <Link href="/school/account">{firstName} — Account</Link>
             <a role="button" tabIndex={0} onClick={signOut}>Sign out</a>
           </>
         ) : (
-          <Link href="/login" className="active" onClick={() => setOpen(false)}>Sign in</Link>
+          <Link href="/school/login" className="active">Sign in</Link>
         )}
       </div>
     </>

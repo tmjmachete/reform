@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Serves the whole app under reformpod.vercel.app/school without touching
-  // the existing static site (Next.js Multi-Zones pattern). next/link and
-  // next/image auto-prepend this; plain <a> to the main site must NOT.
-  basePath: '/school',
+  // Single app for the whole re:form brand: the marketing/content site lives at
+  // the root, and the Bible school lives under /school (app/school/*).
   reactStrictMode: true,
 };
 

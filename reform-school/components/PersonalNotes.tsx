@@ -52,7 +52,7 @@ export default function PersonalNotes({
     return (
       <div className="panel-prompt">
         <p>Sign in to keep your own private notes on this lesson.</p>
-        <Link href="/login" className="btn btn-secondary">Sign in</Link>
+        <Link href="/school/login" className="btn btn-secondary">Sign in</Link>
       </div>
     );
   }

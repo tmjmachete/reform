@@ -1,147 +1,92 @@
 import Link from 'next/link';
 
-const previewCourses = [
-  { n: '01', title: 'The Three Angels’ Messages', blurb: 'A six-lesson journey through Revelation 14 — judgment, worship, and the everlasting gospel.', access: 'free' as const, lessons: 6 },
-  { n: '02', title: 'The Sanctuary & the Judgment', blurb: 'How the heavenly courtroom reveals the character of God and the hope of the cross.', access: 'gated' as const, lessons: 8 },
-  { n: '03', title: 'Foundations of Faith', blurb: 'A guided study through the core beliefs — Scripture, salvation, and the Sabbath rest.', access: 'free' as const, lessons: 10 },
+const pillars = [
+  {
+    href: '/journal',
+    label: 'The Journal',
+    title: 'Reform Journal',
+    body: 'Weekly reflections on faith and life — honest writing tied to the podcast, issue by issue.',
+    cls: 'sig-coral',
+  },
+  {
+    href: '/learn',
+    label: 'The Beliefs',
+    title: 'Learn of God',
+    body: 'Study notes through the 28 Fundamental Beliefs — Scripture, context, and reflection for each.',
+    cls: 'sig-forest',
+  },
+  {
+    href: '/school',
+    label: 'The School',
+    title: 're:form School',
+    body: 'Guided Bible courses with video, notes, downloads, and live sessions. Free to begin.',
+    cls: 'sig-dark',
+  },
 ];
 
-const features = [
-  { k: '01', h: 'Course library', p: 'Structured studies, some open to all and some for enrolled students — built lesson by lesson.', s: 's-canvas' },
-  { k: '02', h: 'Lesson player', p: 'The teaching video alongside the written notes, scripture, and reflection questions.', s: 's-peach' },
-  { k: '03', h: 'Progress tracking', p: 'Pick up exactly where you left off. Every lesson you finish is remembered.', s: 's-mint' },
-  { k: '04', h: 'Personal notes', p: 'Keep your own private notes against any lesson — your study journal, saved as you go.', s: 's-cream' },
-  { k: '05', h: 'Community', p: 'Discuss each lesson with fellow students in threaded, moderated comments.', s: 's-soft' },
-  { k: '06', h: 'Downloads', p: 'Printable PDF study guides for Sabbath school or personal devotion.', s: 's-yellow' },
-  { k: '07', h: 'Live sessions', p: 'Join scheduled live studies and Q&A — see what’s coming up on the calendar.', s: 's-canvas' },
-  { k: '08', h: 'Yours to keep', p: 'Sign in once with Google. Your progress and notes follow you on every device.', s: 's-mustard' },
-];
-
-export default function SchoolLanding() {
+export default function Home() {
   return (
     <main>
-      {/* ── HERO (white canvas, no gradient) ── */}
       <section className="hero">
         <div className="hero-in">
-          <span className="label fu">re:form School</span>
-          <h1 className="fu2">Study the Word, deeply.</h1>
-          <p className="hero-lead fu3">
-            A Bible school for honest seekers and lifelong students alike — guided courses,
-            video teaching, written notes, and live sessions, rooted in Scripture and the
-            message that brought re:form to life.
+          <span className="label">re:form</span>
+          <h1>An honest conversation about faith, life, and finding our way back to God.</h1>
+          <p className="hero-lead">
+            A Seventh-day Adventist ministry — a podcast, a journal, study notes through the
+            beliefs, and a Bible school. Wherever you are on the road, there’s a place to begin.
           </p>
-          <div className="hero-actions fu4">
-            <Link href="/courses" className="btn btn-primary">Browse courses</Link>
-            <Link href="/login" className="btn btn-secondary">Sign in with Google</Link>
-            <span className="hero-note">Free to start · no cost to enrol</span>
+          <div className="hero-actions">
+            <Link href="/school" className="btn btn-primary">Enter the school</Link>
+            <a href="https://youtube.com/@ReformPodcast" target="_blank" rel="noopener" className="btn btn-secondary">
+              Listen on YouTube
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── SCRIPTURE ── */}
       <section className="scripture">
         <div className="scripture-in">
-          <span className="ref">2 Timothy 2:15</span>
+          <span className="ref">Jeremiah 6:16</span>
           <blockquote>
-            “Study to shew thyself approved unto God, a workman that needeth not to be ashamed,
-            rightly dividing the word of truth.”
+            “Stand ye in the ways, and see, and ask for the old paths, where is the good way, and
+            walk therein, and ye shall find rest for your souls.”
           </blockquote>
         </div>
       </section>
 
-      {/* ── SIGNATURE CORAL ── */}
-      <section className="signature">
-        <div className="signature-card sig-coral">
-          <span className="label">The mission</span>
-          <h2>The whole counsel of God — one lesson at a time.</h2>
-          <p>
-            Not a feed of clips, but an ordered path: every study moves from the text to the
-            heart, with room to wrestle, take notes, and respond.
-          </p>
-          <Link href="/courses" className="btn btn-on-dark">Browse the library</Link>
+      <section className="signature" style={{ paddingTop: 'var(--section)' }}>
+        <div className="section-head" style={{ paddingInline: 0 }}>
+          <h2>Three ways in.</h2>
+          <p>Read, study, or enrol — every path leads back to the Word.</p>
         </div>
       </section>
 
-      {/* ── FEATURES (pastel demo-grid) ── */}
-      <section className="section">
-        <div className="section-head">
-          <h2>Everything you need to go deeper</h2>
-          <p>The teaching, the notes, and the community in one place — built to carry you from your first lesson to your last.</p>
-        </div>
-        <div className="demo-grid">
-          {features.map((f) => (
-            <div className={`demo-card ${f.s}`} key={f.k}>
-              <div className="k">{f.k}</div>
-              <h3>{f.h}</h3>
-              <p>{f.p}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {pillars.map((p) => (
+        <section className="signature" key={p.href}>
+          <Link href={p.href} className={`signature-card ${p.cls}`} style={{ display: 'block' }}>
+            <span className="label">{p.label}</span>
+            <h2>{p.title}</h2>
+            <p>{p.body}</p>
+            <span className="btn btn-on-dark">Open {p.title} →</span>
+          </Link>
+        </section>
+      ))}
 
-      {/* ── CREAM CALLOUT ── */}
-      <section className="callout">
-        <div className="callout-card">
-          <div>
-            <h3>Take the study with you.</h3>
-            <p>Every course ships with printable PDF guides — for the Sabbath table, the small group, or the quiet morning.</p>
-          </div>
-          <Link href="/courses" className="btn btn-secondary">See downloads</Link>
-        </div>
-      </section>
-
-      {/* ── COURSES ── */}
-      <section className="section">
-        <div className="section-head">
-          <h2>Courses to start with</h2>
-          <p>A taste of the library. New studies are added as the school grows.</p>
-        </div>
-        <div className="course-grid">
-          {previewCourses.map((c, i) => (
-            <Link href="/courses" className="course-card" key={c.n}>
-              <div className={`course-cover c${i}`}><span className="num">{c.n}</span></div>
-              <div className="course-body">
-                <div className="course-meta">
-                  <span className={`badge ${c.access === 'free' ? 'badge-free' : 'badge-gated'}`}>
-                    {c.access === 'free' ? 'Free' : 'Enrolled'}
-                  </span>
-                </div>
-                <h3>{c.title}</h3>
-                <p>{c.blurb}</p>
-                <span className="foot">{c.lessons} lessons</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── HOW IT WORKS (soft band) ── */}
-      <section className="section" style={{ background: 'var(--surface-soft)' }}>
-        <div className="section-head">
-          <h2>Simple to begin</h2>
-        </div>
-        <div className="steps">
-          <div className="step"><span className="n">STEP 01</span><h3>Sign in with Google</h3><p>One click. No passwords — your account is created the first time you sign in.</p></div>
-          <div className="step"><span className="n">STEP 02</span><h3>Choose a course</h3><p>Start with a free study or enrol in a guided course. Work through it at your own pace.</p></div>
-          <div className="step"><span className="n">STEP 03</span><h3>Watch, read, reflect</h3><p>Follow each lesson, keep your notes, download the guides, and join the conversation.</p></div>
-        </div>
-      </section>
-
-      {/* ── DARK CTA ── */}
-      <section className="cta-dark">
+      <section className="cta-dark" style={{ paddingTop: 'var(--section)' }}>
         <div className="cta-dark-card">
-          <span className="label">Open the Word</span>
-          <h2>Your first lesson is waiting.</h2>
-          <p>Join free and begin a study today — wherever you are on the road back to God.</p>
-          <Link href="/login" className="btn btn-on-dark">Get started</Link>
+          <span className="label">The podcast</span>
+          <h2>Listen to the conversation.</h2>
+          <p>New episodes on faith, doubt, and the journey home — on the re:form YouTube channel.</p>
+          <a href="https://youtube.com/@ReformPodcast" target="_blank" rel="noopener" className="btn btn-on-dark">
+            Watch on YouTube
+          </a>
         </div>
       </section>
 
-      {/* ── LIGHT CTA ── */}
       <section className="cta-light">
         <div className="cta-light-card">
           <h2>Begin a study today.</h2>
-          <Link href="/courses" className="btn btn-primary">Browse courses</Link>
+          <Link href="/school/courses" className="btn btn-primary">Browse courses</Link>
         </div>
       </section>
     </main>

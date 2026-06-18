@@ -138,7 +138,7 @@ export default function Comments({
       ) : (
         <div className="panel-prompt">
           <p>Sign in to join the conversation on this lesson.</p>
-          <Link href="/login" className="btn btn-secondary">Sign in</Link>
+          <Link href="/school/login" className="btn btn-secondary">Sign in</Link>
         </div>
       )}
 

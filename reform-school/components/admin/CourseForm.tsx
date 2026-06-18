@@ -1,4 +1,4 @@
-import { saveCourse } from '@/app/admin/actions';
+import { saveCourse } from '@/app/school/admin/actions';
 
 type Course = {
   id: string;

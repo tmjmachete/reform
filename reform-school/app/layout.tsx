@@ -5,20 +5,20 @@ import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://reformpod.vercel.app'),
-  title: 're:form School — Study the Word, deeply',
+  title: {
+    default: 're:form — Faith, life, and finding our way back to God',
+    template: '%s — re:form',
+  },
   description:
-    'A Bible school from re:form. Guided courses, video lessons, written notes, downloadable studies, and live sessions — rooted in Scripture and the Seventh-day Adventist message.',
+    'A Seventh-day Adventist ministry: an honest conversation about faith and life, with a Bible journal, study notes on the 28 beliefs, and a Bible school.',
   icons: {
-    icon: '/school/assets/favicon.ico',
-    apple: '/school/assets/apple-touch-icon.png',
+    icon: '/assets/favicon.ico',
+    apple: '/assets/apple-touch-icon.png',
   },
   openGraph: {
     type: 'website',
     siteName: 're:form',
-    title: 're:form School — Study the Word, deeply',
-    description:
-      'Guided Bible courses, video lessons, written notes, and live sessions — rooted in Scripture.',
-    url: 'https://reformpod.vercel.app/school',
+    url: 'https://reformpod.vercel.app',
   },
 };
 

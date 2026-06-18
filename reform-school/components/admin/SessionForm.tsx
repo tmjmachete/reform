@@ -1,4 +1,4 @@
-import { saveSession } from '@/app/admin/actions';
+import { saveSession } from '@/app/school/admin/actions';
 
 type Session = {
   id: string;

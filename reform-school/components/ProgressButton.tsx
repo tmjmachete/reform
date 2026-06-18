@@ -21,7 +21,7 @@ export default function ProgressButton({
 
   const toggle = async () => {
     if (!signedIn) {
-      router.push('/login');
+      router.push('/school/login');
       return;
     }
     setBusy(true);

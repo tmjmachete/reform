@@ -4,7 +4,7 @@ export default function Footer() {
     <footer className="page-footer" role="contentinfo">
       <div className="fi">
         <div className="fl">
-          <img src="/school/assets/logo.png" alt="re:form" />
+          <img src="/assets/logo.png" alt="re:form" />
           <p>An honest conversation about faith, life, and finding our way back to God.</p>
         </div>
         <div className="fr">
