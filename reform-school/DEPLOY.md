@@ -1,36 +1,23 @@
-# Deploying re:form School
+# Deploying re:form
 
-The school is a Next.js app that serves under `/school`. The existing static
-site (`../reform-site`) stays as-is; we route `/school/*` to this app using the
-**Next.js Multi-Zones** pattern.
+`reform-school/` is now the **whole site** — brand pages at the root and the
+Bible school under `/school`. It replaces the old static `reform-site/`.
 
 ## 1. Push the code
-`reform-school/` needs to be in the GitHub repo (it's currently untracked).
-Commit it and push to `tmjmachete/reform`.
+Commit `reform-school/` and push to `tmjmachete/reform` (then open a PR /
+merge `feat/reform-school` to `main`).
 
-## 2. Create the Vercel project for the school
-- New Vercel project → import the repo → set **Root Directory** to `reform-school`.
-- Framework preset: **Next.js** (auto-detected).
+## 2. Point the Vercel project at this app
+In the Vercel project that serves `reformpod.vercel.app`:
+- Set **Root Directory** to `reform-school` (Framework preset: Next.js).
 - Add Environment Variables (Production + Preview):
   - `NEXT_PUBLIC_SUPABASE_URL` = `https://cdrxcfasbolgrdlrsidb.supabase.co`
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = `sb_publishable_I9dJCAHRLjFQ2EYJzcGIHA_3DH2cuzE`
-- Deploy. Note the URL it gives you, e.g. `reform-school.vercel.app`.
+- Remove the old static-site config (the `reform-site/vercel.json` rewrites are
+  no longer needed — Next handles routing).
+- Deploy. The whole site (/, /learn, /journal, /school) is served by this app.
 
-## 3. Route /school from the main site
-In the **main site** Vercel project (`reform-site`), add a rewrite so
-`reformpod.vercel.app/school` serves this app. Add to `reform-site/vercel.json`:
-
-```json
-{
-  "rewrites": [
-    { "source": "/school", "destination": "https://reform-school.vercel.app/school" },
-    { "source": "/school/:path*", "destination": "https://reform-school.vercel.app/school/:path*" }
-  ]
-}
-```
-(Merge with the existing `rewrites` array — keep the current `/posts` and `/notes` rules.)
-
-## 4. Supabase auth URLs (Production)
+## 3. Supabase auth URLs (Production)
 Authentication → URL Configuration → **Redirect URLs**, add:
 - `https://reformpod.vercel.app/school/auth/callback`
 - (keep the localhost one for dev)
