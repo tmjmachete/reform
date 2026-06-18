@@ -1,0 +1,32 @@
+[
+  {
+    "issue": "03",
+    "slug": "how-do-i-get-there",
+    "date": "May 2026",
+    "title": "How Do I Get There?",
+    "titleEmphasis": "There?",
+    "excerpt": "You and I need to find our way back. Our lives depend on it. A reflection on the surrendered will, the power of faith, and the long road home.",
+    "image": "/assets/journal-03-road.png",
+    "badge": "Latest"
+  },
+  {
+    "issue": "02",
+    "slug": "how-did-i-get-here",
+    "date": "April 2026",
+    "title": "How Did I Get Here?",
+    "titleEmphasis": "Here?",
+    "excerpt": "We are where we are because of small decisions that have compounded over time. A look at the steps that lead us down — and the old paths that lead us back.",
+    "image": null,
+    "badge": null
+  },
+  {
+    "issue": "01",
+    "slug": "the-mirror-moment",
+    "date": "March 2026",
+    "title": "The Mirror Moment",
+    "titleEmphasis": "Moment",
+    "excerpt": "Before anything can change, something has to break. A reflection on the moment of honest self-confrontation that precedes every genuine return to God.",
+    "image": null,
+    "badge": null
+  }
+]

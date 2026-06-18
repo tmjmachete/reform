@@ -479,6 +479,98 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
 .admin-delete.sm { padding: 4px 10px; font-size: var(--caption); }
 @media (max-width: 560px) { .fld-row { grid-template-columns: 1fr; } }
 
+/* ════════ journal listing ════════ */
+.journal-grid { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--lg); }
+@media (max-width: 760px) { .journal-grid { grid-template-columns: 1fr; } }
+.journal-card { display: flex; flex-direction: column; border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; background: var(--canvas); transition: border-color 0.15s ease; }
+.journal-card:hover { border-color: var(--border-strong); }
+.jc-cover { aspect-ratio: 16 / 9; width: 100%; object-fit: cover; display: block; }
+.jc-cover-fallback { aspect-ratio: 16 / 9; background: var(--surface-dark); display: flex; align-items: flex-end; padding: var(--md); }
+.jc-cover-fallback .iss { font-size: var(--display-md); font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1; }
+.jc-body { padding: var(--lg); display: flex; flex-direction: column; gap: var(--xs); flex: 1; }
+.jc-meta { font-size: var(--caption); color: var(--muted); display: flex; gap: var(--xs); align-items: center; }
+.jc-body h3 { font-size: var(--title-lg); font-weight: 500; color: var(--ink); }
+.jc-body p { font-size: var(--body-md); color: var(--body); line-height: 1.55; flex: 1; }
+.jc-more { font-size: var(--caption); font-weight: 500; color: var(--link); margin-top: var(--xs); }
+
+/* ════════ journal post ════════ */
+.post-hero { padding: var(--section) var(--xxl) var(--lg); }
+.post-hero-in { max-width: 720px; margin: 0 auto; }
+.post-hero .pm { font-size: var(--caption); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: var(--md); }
+.post-hero h1 { font-size: var(--display-lg); margin-bottom: var(--md); }
+.post-hero .deck { font-size: var(--title-md); color: var(--body); line-height: 1.45; }
+.post-hero-img { max-width: var(--maxw); margin: var(--xl) auto 0; padding: 0 var(--xxl); }
+.post-hero-img img { width: 100%; border-radius: var(--r-lg); display: block; }
+@media (max-width: 768px) { .post-hero { padding: var(--xxl) var(--lg) var(--md); } .post-hero h1 { font-size: var(--display-md); } .post-hero-img { padding: 0 var(--lg); } }
+
+.post-prose { max-width: 720px; margin: 0 auto; padding: var(--xl) var(--xxl) var(--section); font-size: var(--title-sm); line-height: 1.8; color: var(--body); }
+@media (max-width: 768px) { .post-prose { padding: var(--lg) var(--lg) var(--xxl); font-size: var(--label-md); } }
+.post-prose p { margin-bottom: var(--lg); }
+.post-prose .lead { font-size: var(--title-md); color: var(--ink); line-height: 1.6; }
+.post-prose h2 { font-size: var(--display-md); margin: var(--xxl) 0 var(--md); }
+.post-prose h3 { font-size: var(--title-lg); margin: var(--xl) 0 var(--sm); }
+.post-prose strong { font-weight: 600; color: var(--ink); }
+.post-prose a { color: var(--link); text-decoration: underline; }
+.post-prose img { width: 100%; border-radius: var(--r-md); display: block; margin: var(--lg) 0 var(--xs); }
+.post-prose figure { margin: var(--xl) 0; }
+.post-prose figcaption,
+.post-prose .inline-caption, .post-prose .inline-image-caption,
+.post-prose .embrace-caption-sub { font-size: var(--caption); color: var(--muted); text-align: center; }
+.post-prose .embrace-caption { font-size: var(--label-md); font-weight: 500; color: var(--ink); text-align: center; }
+.post-prose .embrace-overlay { display: none; }
+
+/* scripture / key-verse blocks */
+.post-prose .scripture, .post-prose .key-verse-box, .post-prose .key-verse {
+  border-left: 3px solid var(--coral); background: var(--surface-soft);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: var(--lg); margin: var(--xl) 0;
+}
+.post-prose .scripture-ref, .post-prose .kv-ref, .post-prose .key-verse-box-ref,
+.post-prose .kv-label, .post-prose .key-verse-box-label, .post-prose .issue-label {
+  font-size: var(--caption); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--coral); margin-bottom: var(--xs); display: block;
+}
+.post-prose .scripture-text, .post-prose .kv-text, .post-prose .key-verse-box-text {
+  font-size: var(--title-md); color: var(--ink); line-height: 1.5; font-style: italic; margin: 0;
+}
+
+/* quote blocks: sop (Ellen White) / stc / pull */
+.post-prose .sop, .post-prose .stc, .post-prose .stc-block, .post-prose .pull, .post-prose .pull-quote {
+  margin: var(--xl) 0; padding: var(--lg) 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+}
+.post-prose .sop-text, .post-prose .stc-text, .post-prose .pull-text, .post-prose .pull-quote-text {
+  font-size: var(--title-md); color: var(--ink); line-height: 1.5; font-style: italic; margin: 0 0 var(--xs);
+}
+.post-prose .sop-source, .post-prose .stc-source { font-size: var(--caption); color: var(--muted); }
+
+/* section markers / dividers */
+.post-prose .section-marker, .post-prose .sm { display: flex; align-items: center; gap: var(--sm); margin: var(--xxl) 0 var(--lg); }
+.post-prose .section-marker-dot, .post-prose .sm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+.post-prose .section-marker-label, .post-prose .sm-label, .post-prose .post-divider-label {
+  font-size: var(--caption); font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); white-space: nowrap;
+}
+.post-prose .section-marker-line, .post-prose .sm-line { flex: 1; height: 1px; background: var(--hairline); }
+.post-prose .post-divider { display: flex; align-items: center; gap: var(--sm); margin: var(--xxl) 0 var(--lg); justify-content: center; }
+.post-prose .post-divider::before, .post-prose .post-divider::after { content: ''; flex: 1; height: 1px; background: var(--hairline); }
+
+/* steps */
+.post-prose .step-block { display: grid; grid-template-columns: 40px 1fr; gap: var(--md); margin: var(--lg) 0; align-items: start; }
+.post-prose .step-num { font-size: var(--title-lg); font-weight: 500; color: var(--coral); line-height: 1; }
+.post-prose .step-title { font-size: var(--title-sm); font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.post-prose .step-text { font-size: var(--label-md); color: var(--body); }
+
+/* closing */
+.post-prose .closing { text-align: center; margin: var(--xxl) 0 0; padding-top: var(--xl); border-top: 1px solid var(--hairline); }
+.post-prose .closing-label { font-size: var(--caption); text-transform: uppercase; letter-spacing: 0.1em; color: var(--coral); }
+.post-prose .closing-text { font-size: var(--title-lg); color: var(--ink); margin: var(--sm) 0; }
+.post-prose .closing-sub { color: var(--muted); }
+.post-prose .transform-note { background: var(--surface-soft); border-radius: var(--r-md); padding: var(--lg); margin: var(--xl) 0; }
+
+/* drop any nav/meta the original body embedded (we render our own) */
+.post-prose .post-nav, .post-prose .post-meta { display: none; }
+
+.post-foot { max-width: 720px; margin: 0 auto; padding: 0 var(--xxl) var(--section); }
+@media (max-width: 768px) { .post-foot { padding: 0 var(--lg) var(--xxl); } }
+
 /* ════════ footer (light canvas) ════════ */
 .page-footer { background: var(--canvas); border-top: 1px solid var(--hairline); color: var(--body); padding: var(--section) var(--xxl) var(--xl); }
 .fi { max-width: var(--maxw); margin: 0 auto; display: flex; justify-content: space-between; gap: var(--xl); flex-wrap: wrap; }
