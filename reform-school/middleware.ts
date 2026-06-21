@@ -6,6 +6,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
+  // Run on the Node.js runtime — the Supabase client pulls in Node-only
+  // modules that the default Edge runtime rejects.
+  runtime: 'nodejs',
   matcher: [
     /*
      * Match all request paths except static assets and image files, so the
