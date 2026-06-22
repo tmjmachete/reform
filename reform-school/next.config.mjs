@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Single app for the whole re:form brand: the marketing/content site lives at
-  // the root, and the Bible school lives under /school (app/school/*).
   reactStrictMode: true,
+  experimental: {
+    // Required for middleware.ts to run on the Node.js runtime (not Edge),
+    // which is necessary because @supabase/ssr uses Node-only modules.
+    nodeMiddleware: true,
+  },
 };
 
 export default nextConfig;
