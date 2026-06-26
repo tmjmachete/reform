@@ -26,7 +26,7 @@
     "title": "How Did I Get Here?",
     "titleEmphasis": "Here?",
     "excerpt": "We are where we are because of small decisions that have compounded over time. A look at the steps that lead us down — and the old paths that lead us back.",
-    "image": null,
+    "image": "/assets/journal/journal-02-hero.png",
     "badge": null
   },
   {
@@ -36,7 +36,7 @@
     "title": "The Mirror Moment",
     "titleEmphasis": "Moment",
     "excerpt": "Before anything can change, something has to break. A reflection on the moment of honest self-confrontation that precedes every genuine return to God.",
-    "image": null,
+    "image": "/assets/journal/journal-01-hero.png",
     "badge": null
   }
 ]
