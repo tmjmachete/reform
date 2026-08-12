@@ -26,7 +26,7 @@ const pillars = [
 
 export default function Home() {
   return (
-    <main className="page-home">
+    <main>
       <section className="hero hero-video">
         <video
           className="hero-bg-video"

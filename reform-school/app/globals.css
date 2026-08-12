@@ -205,24 +205,6 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
   .hero h1 { font-size: var(--display-md); }
 }
 
-/* ════════ dark home page (all sections follow the video hero's tone) ════════ */
-.page-home { background: var(--surface-dark); }
-.page-home .scripture {
-  background: #111;
-  border-top: 1px solid rgba(245,242,238,0.07);
-  border-bottom: 1px solid rgba(245,242,238,0.07);
-}
-.page-home .scripture .ref { color: rgba(245,242,238,0.45); }
-.page-home .scripture blockquote { color: var(--on-dark); }
-.page-home .section-head h2 { color: var(--on-dark); }
-.page-home .section-head p { color: rgba(245,242,238,0.6); }
-.page-home .cta-dark-card { background: var(--surface-dark-elevated); }
-.page-home .cta-light-card {
-  background: var(--surface-dark-elevated);
-  border-color: rgba(245,242,238,0.1);
-}
-.page-home .cta-light-card h2 { color: var(--on-dark); }
-
 /* ════════ video hero ════════ */
 .hero-video {
   position: relative; overflow: hidden;
