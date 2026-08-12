@@ -1,46 +1,45 @@
 /* ════════════════════════════════════════════════════════════════
-   re:form School — design system
-   Conformed to DESIGN-airtable.md: sober editorial interface on white
-   canvas with dark-ink type; brand voltage from full-bleed signature
-   colour cards; Inter (Haas Grotesk substitute) at modest weights;
-   96px section rhythm; no gradients.
+   re:form — design system
+   Black and white palette: warm off-white canvas (#f5f2ee, the logo
+   background) + near-black ink (#0d0d0d). All colour tokens replaced
+   with warm grays. Sea-storm video background on the home hero.
    ════════════════════════════════════════════════════════════════ */
 
 :root {
   /* surface */
-  --canvas:               #ffffff;
-  --surface-soft:         #f8fafc;
-  --surface-strong:       #e0e2e6;
-  --surface-dark:         #181d26;
-  --surface-dark-elevated:#1d1f25;
+  --canvas:               #f5f2ee;  /* warm off-white — logo background */
+  --surface-soft:         #eeebe6;
+  --surface-strong:       #d8d5d0;
+  --surface-dark:         #0d0d0d;
+  --surface-dark-elevated:#1c1c1c;
 
   /* ink / text */
-  --ink:           #181d26;
-  --body:          #333840;
-  --muted:         #41454d;
-  --hairline:      #dddddd;
-  --border-strong: #9297a0;
+  --ink:           #0d0d0d;
+  --body:          #2e2e2e;
+  --muted:         #6b6b6b;
+  --hairline:      #ccc9c4;
+  --border-strong: #7a7a7a;
 
   /* action */
-  --primary:        #181d26;
-  --primary-active: #0d1218;
-  --on-primary:     #ffffff;
-  --on-dark:        #ffffff;
+  --primary:        #0d0d0d;
+  --primary-active: #2e2e2e;
+  --on-primary:     #f5f2ee;
+  --on-dark:        #f5f2ee;
 
-  /* signature card surfaces (brand voltage) */
-  --coral:   #aa2d00;
-  --forest:  #0a2e0e;
-  --cream:   #f5e9d4;
-  --peach:   #fcab79;
-  --mint:    #a8d8c4;
-  --yellow:  #f4d35e;
-  --mustard: #d9a441;
+  /* signature card surfaces — monochrome family */
+  --coral:   #0d0d0d;    /* was coral red   → deep black  */
+  --forest:  #f5f2ee;    /* was forest green → off-white (light card) */
+  --cream:   #e8e5e0;
+  --peach:   #dedad5;
+  --mint:    #c8c5c0;
+  --yellow:  #e0ddd8;
+  --mustard: #8a8784;
 
   /* semantic */
-  --link:        #1b61c9;
-  --link-active: #1a3866;
-  --success:     #006400;
-  --danger:      #aa2d00;
+  --link:        #0d0d0d;
+  --link-active: #2e2e2e;
+  --success:     #2a4a2a;
+  --danger:      #6b2020;
 
   /* type scale (px → rem at 16px root) */
   --display-xl: 3rem;       /* 48 */
@@ -206,6 +205,33 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
   .hero h1 { font-size: var(--display-md); }
 }
 
+/* ════════ video hero ════════ */
+.hero-video {
+  position: relative; overflow: hidden;
+  background: var(--surface-dark);
+  min-height: calc(100vh - var(--nav-h));
+  display: flex; align-items: center;
+  padding: var(--section) var(--xxl);
+}
+.hero-bg-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  opacity: 0.3;
+}
+.hero-video .hero-in { position: relative; z-index: 1; }
+.hero-video h1,
+.hero-video .hero-lead { color: var(--on-dark); }
+.hero-video .label { color: rgba(245,242,238,0.65); }
+.hero-video .hero-note { color: rgba(245,242,238,0.55); }
+@media (max-width: 768px) {
+  .hero-video { padding: var(--xxl) var(--lg); min-height: 75vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-video { display: none; }
+}
+
 /* ════════ scripture strip ════════ */
 .scripture { background: var(--surface-soft); padding: var(--xxl); text-align: center; }
 .scripture-in { max-width: 720px; margin: 0 auto; }
@@ -220,7 +246,12 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
 .signature-card p { color: rgba(255,255,255,0.85); max-width: 56ch; margin-bottom: var(--lg); font-size: var(--label-md); }
 .sig-coral  { background: var(--coral); }
 .sig-forest { background: var(--forest); }
-.sig-dark   { background: var(--surface-dark); }
+.sig-forest .label { color: var(--muted); }
+.sig-forest h2 { color: var(--ink); }
+.sig-forest p  { color: var(--body); }
+.sig-forest .btn-on-dark { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+.sig-forest .btn-on-dark:hover { background: var(--surface-dark-elevated); }
+.sig-dark   { background: var(--surface-dark-elevated); }
 @media (max-width: 768px) {
   .signature { padding: var(--md) var(--lg); }
   .signature-card { padding: var(--xl); }
@@ -341,7 +372,7 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
 .progress-btn { font-family: inherit; font-size: var(--label-md); font-weight: 500; padding: 12px 20px; border-radius: var(--r-lg); cursor: pointer; border: 1px solid var(--hairline); background: var(--canvas); color: var(--ink); transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease; display: inline-flex; align-items: center; gap: var(--xs); }
 .progress-btn:hover:not(:disabled) { border-color: var(--ink); }
 .progress-btn:disabled { opacity: 0.6; cursor: default; }
-.progress-btn.done { background: var(--forest); border-color: var(--forest); color: #fff; }
+.progress-btn.done { background: var(--ink); border-color: var(--ink); color: var(--on-dark); }
 
 .lesson-aside { position: sticky; top: calc(var(--nav-h) + var(--lg)); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--xs); }
 @media (max-width: 980px) { .lesson-aside { position: static; } }

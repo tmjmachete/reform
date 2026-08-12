@@ -27,7 +27,17 @@ const pillars = [
 export default function Home() {
   return (
     <main>
-      <section className="hero">
+      <section className="hero hero-video">
+        <video
+          className="hero-bg-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/assets/sea-storm.jpg"
+        >
+          <source src="/assets/sea-storm.mp4" type="video/mp4" />
+        </video>
         <div className="hero-in">
           <span className="label">re:form</span>
           <h1>An honest conversation about faith, life, and finding our way back to God.</h1>
@@ -36,7 +46,7 @@ export default function Home() {
             beliefs, and a Bible school. Wherever you are on the road, there’s a place to begin.
           </p>
           <div className="hero-actions">
-            <Link href="/school" className="btn btn-primary">Enter the school</Link>
+            <Link href="/school" className="btn btn-on-dark">Enter the school</Link>
             <a href="https://youtube.com/@ReformPodcast" target="_blank" rel="noopener" className="btn btn-secondary">
               Listen on YouTube
             </a>
