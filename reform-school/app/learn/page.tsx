@@ -5,6 +5,18 @@ export const metadata = {
   title: 'Learn of God — the 28 Fundamental Beliefs',
   description:
     'Study notes through the 28 Fundamental Beliefs of the Seventh-day Adventist Church — Scripture, context, and reflection.',
+  openGraph: {
+    title: 'Learn of God — the 28 Fundamental Beliefs',
+    description:
+      'A study journey through the beliefs of the Seventh-day Adventist Church — Scripture, context, and reflection for every one.',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Learn of God' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Learn of God — the 28 Fundamental Beliefs',
+    description: 'Study notes through the 28 SDA Fundamental Beliefs — Scripture, context, and reflection.',
+    images: ['/opengraph-image'],
+  },
 };
 
 type Belief = {

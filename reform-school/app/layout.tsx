@@ -3,8 +3,10 @@ import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformpod.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://reformpod.vercel.app'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 're:form — Faith, life, and finding our way back to God',
     template: '%s — re:form',
@@ -18,7 +20,18 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 're:form',
-    url: 'https://reformpod.vercel.app',
+    url: siteUrl,
+    title: 're:form — Faith, life, and finding our way back to God',
+    description:
+      'A Seventh-day Adventist ministry: an honest conversation about faith and life, with a Bible journal, study notes on the 28 beliefs, and a Bible school.',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 're:form' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 're:form — Faith, life, and finding our way back to God',
+    description:
+      'A Seventh-day Adventist ministry: podcast, journal, 28 beliefs study, and a Bible school.',
+    images: ['/opengraph-image'],
   },
 };
 

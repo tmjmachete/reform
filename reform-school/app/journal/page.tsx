@@ -4,6 +4,17 @@ import posts from '@/content/journal/index.json';
 export const metadata = {
   title: 'Reform Journal',
   description: 'Weekly reflections on faith and life from re:form — tied to the podcast.',
+  openGraph: {
+    title: 'Reform Journal — re:form',
+    description: 'Weekly reflections on faith and life — honest writing tied to the re:form podcast, issue by issue.',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Reform Journal' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Reform Journal — re:form',
+    description: 'Weekly reflections on faith and life, tied to the re:form podcast.',
+    images: ['/opengraph-image'],
+  },
 };
 
 type Post = {

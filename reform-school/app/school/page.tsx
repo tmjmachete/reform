@@ -4,6 +4,18 @@ export const metadata = {
   title: 'School — Study the Word, deeply',
   description:
     'A Bible school from re:form. Guided courses, video lessons, written notes, downloadable studies, and live sessions.',
+  openGraph: {
+    title: 're:form School — Study the Word, deeply',
+    description:
+      'Guided Bible courses with video lessons, written notes, PDF downloads, and live sessions. Free to begin.',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 're:form School' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 're:form School — Study the Word, deeply',
+    description: 'Guided Bible courses with video, notes, and live sessions. Free to begin.',
+    images: ['/opengraph-image'],
+  },
 };
 
 const previewCourses = [
