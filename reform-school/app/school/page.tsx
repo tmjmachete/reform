@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 
 export const metadata = {
   title: 'School — Study the Word, deeply',
@@ -25,14 +25,14 @@ const previewCourses = [
 ];
 
 const features = [
-  { k: '01', h: 'Course library', p: 'Structured studies, some open to all and some for enrolled students — built lesson by lesson.', s: 's-canvas' },
-  { k: '02', h: 'Lesson player', p: 'The teaching video alongside the written notes, scripture, and reflection questions.', s: 's-peach' },
-  { k: '03', h: 'Progress tracking', p: 'Pick up exactly where you left off. Every lesson you finish is remembered.', s: 's-mint' },
-  { k: '04', h: 'Personal notes', p: 'Keep your own private notes against any lesson — your study journal, saved as you go.', s: 's-cream' },
-  { k: '05', h: 'Community', p: 'Discuss each lesson with fellow students in threaded, moderated comments.', s: 's-soft' },
-  { k: '06', h: 'Downloads', p: 'Printable PDF study guides for Sabbath school or personal devotion.', s: 's-yellow' },
-  { k: '07', h: 'Live sessions', p: 'Join scheduled live studies and Q&A — see what’s coming up on the calendar.', s: 's-canvas' },
-  { k: '08', h: 'Yours to keep', p: 'Sign in once with Google. Your progress and notes follow you on every device.', s: 's-mustard' },
+  { k: '01', h: 'Course library', p: 'Structured studies, some open to all and some for enrolled students — built lesson by lesson.', s: 's-canvas', href: '/school/courses' },
+  { k: '02', h: 'Lesson player', p: 'The teaching video alongside the written notes, scripture, and reflection questions.', s: 's-peach', href: '/school/courses' },
+  { k: '03', h: 'Progress tracking', p: 'Pick up exactly where you left off. Every lesson you finish is remembered.', s: 's-mint', href: '/school/account' },
+  { k: '04', h: 'Personal notes', p: 'Keep your own private notes against any lesson — your study journal, saved as you go.', s: 's-cream', href: '/school/account' },
+  { k: '05', h: 'Community', p: 'Discuss each lesson with fellow students in threaded, moderated comments.', s: 's-soft', href: '/school/courses' },
+  { k: '06', h: 'Downloads', p: 'Printable PDF study guides for Sabbath school or personal devotion.', s: 's-yellow', href: '/school/courses' },
+  { k: '07', h: 'Live sessions', p: "Join scheduled live studies and Q&A — see what's coming up on the calendar.", s: 's-canvas', href: '/school/courses' },
+  { k: '08', h: 'Yours to keep', p: 'Sign in once with Google. Your progress and notes follow you on every device.', s: 's-mustard', href: '/school/login' },
 ];
 
 export default function SchoolLanding() {
@@ -88,11 +88,11 @@ export default function SchoolLanding() {
         </div>
         <div className="demo-grid">
           {features.map((f) => (
-            <div className={`demo-card ${f.s}`} key={f.k}>
+            <Link className={`demo-card ${f.s}`} href={f.href} key={f.k}>
               <div className="k">{f.k}</div>
               <h3>{f.h}</h3>
               <p>{f.p}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
