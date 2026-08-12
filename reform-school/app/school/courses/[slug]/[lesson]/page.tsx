@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { youTubeId, youTubeEmbedUrl } from '@/lib/youtube';
 import ProgressButton from '@/components/ProgressButton';
 import PersonalNotes from '@/components/PersonalNotes';
 import Comments, { type CommentRow } from '@/components/Comments';
@@ -100,7 +99,6 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const idx = lessons.findIndex((l) => l.id === current.id);
   const prev = idx > 0 ? lessons[idx - 1] : null;
   const next = idx >= 0 && idx < lessons.length - 1 ? lessons[idx + 1] : null;
-  const videoId = youTubeId(current.video_url);
   const paragraphs = (current.notes ?? '').split(/\n{2,}/).filter(Boolean);
 
   return (
@@ -109,22 +107,6 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
         <div className="lesson-crumb">
           <Link href="/school/courses">Courses</Link> &nbsp;/&nbsp; <Link href={`/school/courses/${course.slug}`}>{course.title}</Link>
         </div>
-
-        {videoId ? (
-          <div className="lesson-video">
-            <iframe
-              src={youTubeEmbedUrl(videoId)}
-              title={current.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        ) : (
-          <div className="lesson-video-empty">
-            <span className="vi">▶</span>
-            <span>Video coming soon</span>
-          </div>
-        )}
 
         <h1>{current.title}</h1>
 
