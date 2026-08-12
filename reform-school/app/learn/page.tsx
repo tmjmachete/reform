@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import beliefs from '@/content/learn/index.json';
 
@@ -28,6 +29,7 @@ type Belief = {
 };
 
 export default function LearnPage() {
+  notFound();
   const list = beliefs as Belief[];
   // preserve first-seen category order
   const categories: string[] = [];

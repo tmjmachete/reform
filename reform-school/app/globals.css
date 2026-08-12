@@ -282,6 +282,8 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 .demo-card.s-mustard{ background: var(--mustard); }
 .demo-card.s-soft   { background: var(--surface-soft); }
 .demo-card.tall { grid-row: span 2; display: flex; flex-direction: column; }
+.demo-card-soon { opacity: 0.45; cursor: default; pointer-events: none; }
+.demo-card-soon .soon-label { display: inline-block; margin-top: var(--sm); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
 @media (max-width: 1024px) { .demo-grid { grid-template-columns: repeat(2, 1fr); } .demo-card.tall { grid-row: auto; } }
 @media (max-width: 560px) { .demo-grid { grid-template-columns: 1fr; } }
 
@@ -306,6 +308,7 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 .badge { font-size: var(--legal); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: var(--r-xs); }
 .badge-free { background: var(--surface-soft); color: var(--success); border: 1px solid var(--hairline); }
 .badge-gated { background: var(--surface-soft); color: var(--muted); border: 1px solid var(--hairline); }
+.badge-enrolled { background: var(--ink); color: var(--canvas); border: 1px solid var(--ink); }
 .course-body h3 { font-size: var(--title-sm); font-weight: 500; color: var(--ink); }
 .course-body p { font-size: var(--caption); color: var(--body); line-height: 1.5; flex: 1; }
 .course-body .foot { font-size: var(--caption); color: var(--muted); }

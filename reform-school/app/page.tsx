@@ -9,17 +9,10 @@ const pillars = [
     cls: 'sig-coral',
   },
   {
-    href: '/learn',
-    label: 'The Beliefs',
-    title: 'Learn of God',
-    body: 'Study notes through the 28 Fundamental Beliefs — Scripture, context, and reflection for each.',
-    cls: 'sig-forest',
-  },
-  {
     href: '/school',
     label: 'The School',
     title: 're:form School',
-    body: 'Guided Bible courses with video, notes, downloads, and live sessions. Free to begin.',
+    body: 'Guided Bible courses with written notes, downloads, and live sessions. Free to begin.',
     cls: 'sig-dark',
   },
 ];
@@ -66,7 +59,7 @@ export default function Home() {
 
       <section className="signature" style={{ paddingTop: 'var(--section)' }}>
         <div className="section-head" style={{ paddingInline: 0 }}>
-          <h2>Three ways in.</h2>
+          <h2>Two ways in.</h2>
           <p>Read, study, or enrol — every path leads back to the Word.</p>
         </div>
       </section>
@@ -90,6 +83,17 @@ export default function Home() {
           <a href="https://youtube.com/@ReformPodcast" target="_blank" rel="noopener" className="btn btn-on-dark">
             Watch on YouTube
           </a>
+        </div>
+      </section>
+
+      <section className="section" style={{ textAlign: 'center', paddingBlock: 'var(--section)' }}>
+        <span className="label">Contact</span>
+        <h2 style={{ marginTop: 'var(--xs)', marginBottom: 'var(--md)' }}>Get in touch.</h2>
+        <p style={{ color: 'var(--body)', marginBottom: 'var(--lg)', maxWidth: '36ch', marginInline: 'auto' }}>
+          Questions, prayer requests, or just want to connect — reach out directly.
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sm)', alignItems: 'center' }}>
+          <a href="mailto:tmjmachete@gmail.com" className="btn btn-secondary">tmjmachete@gmail.com</a>
         </div>
       </section>
 

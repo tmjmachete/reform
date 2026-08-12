@@ -35,6 +35,7 @@ function readBody(slug: string): string | null {
 }
 
 export default async function BeliefPage({ params }: { params: Promise<{ slug: string }> }) {
+  notFound();
   const { slug } = await params;
   const belief = beliefs.find((b) => b.slug === slug);
   const body = belief ? readBody(slug) : null;

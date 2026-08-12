@@ -26,13 +26,11 @@ const previewCourses = [
 
 const features = [
   { k: '01', h: 'Course library', p: 'Structured studies, some open to all and some for enrolled students — built lesson by lesson.', s: 's-canvas', href: '/school/courses' },
-  { k: '02', h: 'Lesson player', p: 'The teaching video alongside the written notes, scripture, and reflection questions.', s: 's-peach', href: '/school/courses' },
-  { k: '03', h: 'Progress tracking', p: 'Pick up exactly where you left off. Every lesson you finish is remembered.', s: 's-mint', href: '/school/account' },
-  { k: '04', h: 'Personal notes', p: 'Keep your own private notes against any lesson — your study journal, saved as you go.', s: 's-cream', href: '/school/account' },
-  { k: '05', h: 'Community', p: 'Discuss each lesson with fellow students in threaded, moderated comments.', s: 's-soft', href: '/school/courses' },
-  { k: '06', h: 'Downloads', p: 'Printable PDF study guides for Sabbath school or personal devotion.', s: 's-yellow', href: '/school/courses' },
-  { k: '07', h: 'Live sessions', p: "Join scheduled live studies and Q&A — see what's coming up on the calendar.", s: 's-canvas', href: '/school/courses' },
-  { k: '08', h: 'Yours to keep', p: 'Sign in once with Google. Your progress and notes follow you on every device.', s: 's-mustard', href: '/school/login' },
+  { k: '02', h: 'Progress tracking', p: 'Pick up exactly where you left off. Every lesson you finish is remembered.', s: 's-mint', href: '/school/account' },
+  { k: '03', h: 'Personal notes', p: 'Keep your own private notes against any lesson — your study journal, saved as you go.', s: 's-cream', href: '/school/account' },
+  { k: '04', h: 'Community', p: 'Discuss each lesson with fellow students in threaded, moderated comments.', s: 's-soft', href: '/school/courses' },
+  { k: '05', h: 'Downloads', p: 'Printable PDF study guides for Sabbath school or personal devotion.', s: 's-yellow', href: '/school/courses' },
+  { k: '06', h: 'Live sessions', p: "Join scheduled live studies and Q&A — see what's coming up on the calendar.", s: 's-canvas', href: '/school/courses', soon: true },
 ];
 
 export default function SchoolLanding() {
@@ -45,13 +43,12 @@ export default function SchoolLanding() {
           <h1 className="fu2">Study the Word, deeply.</h1>
           <p className="hero-lead fu3">
             A Bible school for honest seekers and lifelong students alike — guided courses,
-            video teaching, written notes, and live sessions, rooted in Scripture and the
+            written notes, and live sessions, rooted in Scripture and the
             message that brought re:form to life.
           </p>
           <div className="hero-actions fu4">
             <Link href="/school/courses" className="btn btn-primary">Browse courses</Link>
             <Link href="/school/login" className="btn btn-secondary">Sign in with Google</Link>
-            <span className="hero-note">Free to start · no cost to enrol</span>
           </div>
         </div>
       </section>
@@ -87,13 +84,22 @@ export default function SchoolLanding() {
           <p>The teaching, the notes, and the community in one place — built to carry you from your first lesson to your last.</p>
         </div>
         <div className="demo-grid">
-          {features.map((f) => (
-            <Link className={`demo-card ${f.s}`} href={f.href} key={f.k}>
-              <div className="k">{f.k}</div>
-              <h3>{f.h}</h3>
-              <p>{f.p}</p>
-            </Link>
-          ))}
+          {features.map((f) =>
+            f.soon ? (
+              <div className={`demo-card ${f.s} demo-card-soon`} key={f.k}>
+                <div className="k">{f.k}</div>
+                <h3>{f.h}</h3>
+                <p>{f.p}</p>
+                <span className="soon-label">Coming soon</span>
+              </div>
+            ) : (
+              <Link className={`demo-card ${f.s}`} href={f.href} key={f.k}>
+                <div className="k">{f.k}</div>
+                <h3>{f.h}</h3>
+                <p>{f.p}</p>
+              </Link>
+            )
+          )}
         </div>
       </section>
 

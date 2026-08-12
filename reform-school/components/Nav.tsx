@@ -51,7 +51,6 @@ export default function Nav() {
   const links = (
     <>
       <Link href="/" className={is('/') ? 'active' : undefined}>Home</Link>
-      <Link href="/learn" className={is('/learn') ? 'active' : undefined}>Learn of God</Link>
       <Link href="/journal" className={is('/journal') ? 'active' : undefined}>Reform Journal</Link>
       <Link href="/school" className={is('/school') ? 'active' : undefined}>School</Link>
     </>
