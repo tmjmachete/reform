@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "reform-school/app/globals.css"
+        ],
+        "createdAt": "2026-08-12T13:48:11.628Z",
+        "reason": "Semantic left-border accent on scripture/key-verse blocks in editorial prose; not a decorative card tab"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-08-12T14:08:31.660Z",
+        "reason": "Inter replaced by Libre Franklin + Lora — this suppression covers any residual detection during transition"
+      }
+    ]
+  }
+}

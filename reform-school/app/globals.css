@@ -80,11 +80,11 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--canvas);
   color: var(--body);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   font-size: var(--body-md);
   font-weight: 400;
   line-height: 1.55;
-  font-feature-settings: 'cv05' 1, 'ss01' 1;
+  font-feature-settings: 'kern' 1;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -92,7 +92,7 @@ a { color: inherit; text-decoration: none; }
 
 :focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
 
-h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; }
+h1, h2, h3, h4 { font-family: 'Lora', Georgia, 'Times New Roman', serif; color: var(--ink); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
 
 /* ── shared atoms ── */
 .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--xxl); }
@@ -236,7 +236,7 @@ h1, h2, h3, h4 { color: var(--ink); font-weight: 400; line-height: 1.2; letter-s
 .scripture { background: var(--surface-soft); padding: var(--xxl); text-align: center; }
 .scripture-in { max-width: 720px; margin: 0 auto; }
 .scripture .ref { font-size: var(--caption); font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: var(--md); }
-.scripture blockquote { font-size: var(--title-lg); font-weight: 400; color: var(--ink); line-height: 1.4; }
+.scripture blockquote { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: var(--title-lg); font-weight: 400; color: var(--ink); line-height: 1.5; }
 
 /* ════════ signature cards (full-bleed colour, brand voltage) ════════ */
 .signature { padding: var(--xl) var(--xxl); }
