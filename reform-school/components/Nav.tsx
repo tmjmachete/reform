@@ -11,15 +11,29 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [supabase] = useState(() => createClient());
   const [user, setUser] = useState<User | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
   const is = (p: string) => (p === '/' ? pathname === '/' : pathname.startsWith(p));
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const loadUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+      if (data.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', data.user.id)
+          .maybeSingle();
+        setIsAdmin((profile as { role: string } | null)?.role === 'admin');
+      }
+    };
+    loadUser();
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      if (!session?.user) setIsAdmin(false);
     });
     return () => sub.subscription.unsubscribe();
   }, [supabase]);
@@ -56,6 +70,9 @@ export default function Nav() {
           {links}
           {user ? (
             <>
+              {isAdmin && (
+                <Link href="/school/admin" className={is('/school/admin') ? 'active' : undefined}>Admin</Link>
+              )}
               <Link href="/school/account" className="nav-user" title={user.email ?? undefined}>{firstName}</Link>
               <button className="nav-signout" onClick={signOut}>Sign out</button>
             </>
@@ -78,6 +95,7 @@ export default function Nav() {
         {links}
         {user ? (
           <>
+            {isAdmin && <Link href="/school/admin">Admin panel</Link>}
             <Link href="/school/account">{firstName} — Account</Link>
             <a role="button" tabIndex={0} onClick={signOut}>Sign out</a>
           </>
