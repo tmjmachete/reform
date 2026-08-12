@@ -283,7 +283,7 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 .demo-card.s-soft   { background: var(--surface-soft); }
 .demo-card.tall { grid-row: span 2; display: flex; flex-direction: column; }
 .demo-card-soon { opacity: 0.45; cursor: default; pointer-events: none; }
-.demo-card-soon .soon-label { display: inline-block; margin-top: var(--sm); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.demo-card-soon .soon-label { display: inline-block; margin-top: var(--sm); font-size: var(--legal); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
 @media (max-width: 1024px) { .demo-grid { grid-template-columns: repeat(2, 1fr); } .demo-card.tall { grid-row: auto; } }
 @media (max-width: 560px) { .demo-grid { grid-template-columns: 1fr; } }
 

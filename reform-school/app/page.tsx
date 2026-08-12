@@ -93,7 +93,8 @@ export default function Home() {
           Questions, prayer requests, or just want to connect — reach out directly.
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--sm)', alignItems: 'center' }}>
-          <a href="mailto:tmjmachete@gmail.com" className="btn btn-secondary">tmjmachete@gmail.com</a>
+          <a href="tel:+26777625047" className="btn btn-secondary">+267 77 625 047</a>
+          <a href="mailto:podcastreform@gmail.com" className="btn btn-secondary">podcastreform@gmail.com</a>
         </div>
       </section>
 
