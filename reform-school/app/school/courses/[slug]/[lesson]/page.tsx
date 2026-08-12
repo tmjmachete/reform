@@ -99,7 +99,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const idx = lessons.findIndex((l) => l.id === current.id);
   const prev = idx > 0 ? lessons[idx - 1] : null;
   const next = idx >= 0 && idx < lessons.length - 1 ? lessons[idx + 1] : null;
-  const paragraphs = (current.notes ?? '').split(/\n{2,}/).filter(Boolean);
+  const hasNotes = !!current.notes?.trim();
+  const notesIsHtml = current.notes?.trimStart().startsWith('<');
 
   return (
     <div className="lesson-shell">
@@ -110,14 +111,18 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
 
         <h1>{current.title}</h1>
 
-        {paragraphs.length > 0 && (
+        {hasNotes && (
           <>
             <div className="lesson-section-label">Study notes</div>
-            <div className="lesson-notes">
-              {paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
+            {notesIsHtml ? (
+              <div className="lesson-notes post-prose" dangerouslySetInnerHTML={{ __html: current.notes! }} />
+            ) : (
+              <div className="lesson-notes">
+                {current.notes!.split(/\n{2,}/).filter(Boolean).map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            )}
           </>
         )}
 

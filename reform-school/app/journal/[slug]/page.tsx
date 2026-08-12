@@ -3,6 +3,10 @@ import path from 'path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import postsData from '@/content/journal/index.json';
+import { createClient } from '@/lib/supabase/server';
+import Comments, { type CommentRow } from '@/components/Comments';
+
+export const dynamic = 'force-dynamic';
 
 type Post = {
   issue: string;
@@ -15,10 +19,6 @@ type Post = {
 };
 
 const posts = postsData as Post[];
-
-export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -42,8 +42,19 @@ export default async function JournalPost({ params }: { params: Promise<{ slug: 
   const body = readBody(slug);
   if (!post || !body) notFound();
 
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data: commentData } = await supabase
+    .from('comments')
+    .select('id, user_id, parent_id, body, author_name, author_avatar, created_at')
+    .eq('post_slug' as never, slug)
+    .order('created_at', { ascending: true });
+  const comments = (commentData ?? []) as unknown as CommentRow[];
+
   const idx = posts.findIndex((p) => p.slug === slug);
-  // posts.json is newest-first; "next issue" is the previous index
   const newer = idx > 0 ? posts[idx - 1] : null;
   const older = idx < posts.length - 1 ? posts[idx + 1] : null;
 
@@ -68,6 +79,14 @@ export default async function JournalPost({ params }: { params: Promise<{ slug: 
 
       <div className="post-foot">
         <hr className="admin-hr" />
+        <div className="lesson-section-label">Discussion</div>
+        <Comments
+          postSlug={slug}
+          signedIn={!!user}
+          currentUserId={user?.id ?? null}
+          initial={comments}
+        />
+        <hr className="admin-hr" style={{ marginTop: 'var(--xl)' }} />
         <div className="lesson-actions" style={{ border: 0, paddingTop: 0, marginTop: 0 }}>
           <Link href="/journal" className="btn btn-secondary">← All issues</Link>
           <div className="lesson-nav-links">

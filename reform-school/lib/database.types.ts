@@ -20,7 +20,8 @@ export type Database = {
           created_at: string
           id: string
           is_hidden: boolean
-          lesson_id: string
+          lesson_id: string | null
+          post_slug: string | null
           parent_id: string | null
           updated_at: string
           user_id: string
@@ -32,7 +33,8 @@ export type Database = {
           created_at?: string
           id?: string
           is_hidden?: boolean
-          lesson_id: string
+          lesson_id?: string | null
+          post_slug?: string | null
           parent_id?: string | null
           updated_at?: string
           user_id: string
@@ -44,7 +46,8 @@ export type Database = {
           created_at?: string
           id?: string
           is_hidden?: boolean
-          lesson_id?: string
+          lesson_id?: string | null
+          post_slug?: string | null
           parent_id?: string | null
           updated_at?: string
           user_id?: string

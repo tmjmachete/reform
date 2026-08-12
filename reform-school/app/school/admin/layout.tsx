@@ -13,6 +13,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/school/admin">Courses</Link>
           <Link href="/school/admin/sessions">Live sessions</Link>
           <Link href="/school/admin/comments">Comments</Link>
+          <Link href="/school/admin/users">Users</Link>
           <Link href="/">← Back to site</Link>
         </nav>
       </div>

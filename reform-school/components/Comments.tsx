@@ -33,13 +33,17 @@ function Avatar({ name, src }: { name: string | null; src: string | null }) {
   return <span className="cm-avatar cm-avatar-fallback" aria-hidden="true">{initial}</span>;
 }
 
+type CommentTarget =
+  | { lessonId: string; postSlug?: never }
+  | { postSlug: string; lessonId?: never };
+
 export default function Comments({
   lessonId,
+  postSlug,
   signedIn,
   currentUserId,
   initial,
-}: {
-  lessonId: string;
+}: CommentTarget & {
   signedIn: boolean;
   currentUserId: string | null;
   initial: CommentRow[];
@@ -52,11 +56,13 @@ export default function Comments({
   const [busy, setBusy] = useState(false);
 
   const reload = async () => {
-    const { data } = await supabase
+    const base = supabase
       .from('comments')
-      .select('id, user_id, parent_id, body, author_name, author_avatar, created_at')
-      .eq('lesson_id', lessonId)
-      .order('created_at', { ascending: true });
+      .select('id, user_id, parent_id, body, author_name, author_avatar, created_at');
+    const query = lessonId
+      ? base.eq('lesson_id', lessonId)
+      : base.eq('post_slug', postSlug!);
+    const { data } = await query.order('created_at', { ascending: true });
     setComments((data ?? []) as unknown as CommentRow[]);
   };
 
@@ -68,8 +74,14 @@ export default function Comments({
       data: { user },
     } = await supabase.auth.getUser();
     if (user) {
-      const row: TablesInsert<'comments'> = { user_id: user.id, lesson_id: lessonId, body: text, parent_id: parentId };
-      await supabase.from('comments').insert(row as never);
+      const payload = {
+        user_id: user.id,
+        lesson_id: lessonId ?? null,
+        post_slug: postSlug ?? null,
+        body: text,
+        parent_id: parentId,
+      };
+      await supabase.from('comments').insert(payload as never);
       await reload();
     }
     setBusy(false);
@@ -137,7 +149,7 @@ export default function Comments({
         </div>
       ) : (
         <div className="panel-prompt">
-          <p>Sign in to join the conversation on this lesson.</p>
+          <p>{lessonId ? 'Sign in to join the conversation on this lesson.' : 'Sign in to join the conversation.'}</p>
           <Link href="/school/login" className="btn btn-secondary">Sign in</Link>
         </div>
       )}

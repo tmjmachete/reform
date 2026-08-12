@@ -151,6 +151,16 @@ export async function deleteSession(formData: FormData) {
   redirect('/school/admin/sessions');
 }
 
+/* ── user roles ── */
+export async function setUserRole(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const userId = str(formData, 'user_id');
+  const role = str(formData, 'role');
+  if (!['student', 'admin'].includes(role)) throw new Error('Invalid role');
+  await supabase.from('profiles').update({ role } as never).eq('id', userId);
+  revalidatePath('/school/admin/users');
+}
+
 /* ── comment moderation ── */
 export async function setCommentHidden(formData: FormData) {
   const { supabase } = await requireAdmin();

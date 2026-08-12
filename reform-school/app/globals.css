@@ -452,6 +452,25 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 .account-dl dd { font-size: var(--title-md); color: var(--ink); }
 @media (max-width: 560px) { .account-dl { grid-template-columns: 1fr; } }
 
+/* ════════ profile ════════ */
+.profile-course-list { max-width: var(--maxw); margin: 0 auto; display: flex; flex-direction: column; gap: var(--sm); }
+.profile-course-row { display: block; text-decoration: none; padding: var(--md) var(--lg); background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-md); transition: border-color 0.15s ease; }
+.profile-course-row:hover { border-color: var(--ink); }
+.pcr-title { font-size: var(--body-md); font-weight: 500; color: var(--ink); margin-bottom: var(--xs); }
+.pcr-progress { display: flex; flex-direction: column; gap: 6px; }
+.pcr-bar { background: var(--hairline); border-radius: 2px; height: 4px; overflow: hidden; }
+.pcr-fill { background: var(--ink); height: 100%; border-radius: 2px; }
+.pcr-label { font-size: var(--caption); color: var(--muted); }
+
+/* ════════ personal notes ════════ */
+.notes-list { max-width: var(--maxw); margin: 0 auto; display: flex; flex-direction: column; gap: var(--md); }
+.note-card { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--lg); }
+.note-meta { display: flex; justify-content: space-between; align-items: baseline; gap: var(--md); margin-bottom: var(--sm); flex-wrap: wrap; }
+.note-lesson { font-size: var(--caption); font-weight: 500; color: var(--ink); text-decoration: none; }
+.note-lesson:hover { text-decoration: underline; }
+.note-date { font-size: var(--legal); color: var(--muted); white-space: nowrap; }
+.note-body { font-size: var(--body-md); color: var(--body); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+
 /* ════════ live sessions ════════ */
 .session-list { max-width: var(--maxw); margin: 0 auto; display: flex; flex-direction: column; gap: var(--md); }
 .session-card { display: grid; grid-template-columns: 220px 1fr auto; gap: var(--lg); align-items: center; padding: var(--lg); border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--canvas); }

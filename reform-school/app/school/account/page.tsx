@@ -58,11 +58,13 @@ export default async function AccountPage() {
         </dl>
       </div>
 
-      {profile?.role === 'admin' && (
-        <div style={{ maxWidth: 'var(--maxw)', margin: 'var(--lg) auto 0' }}>
-          <Link href="/school/admin" className="btn btn-secondary">Open admin panel</Link>
-        </div>
-      )}
+      <div style={{ maxWidth: 'var(--maxw)', margin: 'var(--lg) auto 0', display: 'flex', gap: 'var(--md)', flexWrap: 'wrap' }}>
+        <Link href="/school/profile" className="btn btn-secondary">My progress</Link>
+        <Link href="/school/notes" className="btn btn-secondary">My notes</Link>
+        {profile?.role === 'admin' && (
+          <Link href="/school/admin" className="btn btn-secondary">Admin panel</Link>
+        )}
+      </div>
     </main>
   );
 }
