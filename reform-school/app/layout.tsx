@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import SessionRefresh from '@/components/SessionRefresh';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformpod.vercel.app';
 
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <SessionRefresh />
         <Nav />
         <div className="page-body" id="main">
           {children}
