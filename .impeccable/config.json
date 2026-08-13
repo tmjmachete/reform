@@ -83,6 +83,85 @@
         "value": "oklch(0 0 0 / 0.1)",
         "createdAt": "2026-08-12T15:39:07.160Z",
         "reason": "Pure black image outline per make-interfaces-feel-better skill — must be oklch(0 0 0) not a tinted palette neutral to avoid edge color contamination"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0,0,0,0.06)",
+        "createdAt": "2026-08-13T09:04:43.701Z",
+        "reason": "User confirmed: standard hover-lift shadow utility"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgba(0,0,0,0.18)",
+        "createdAt": "2026-08-13T09:04:43.818Z",
+        "reason": "User confirmed: standard button box-shadow utility"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#f5e46a",
+        "createdAt": "2026-08-13T09:04:43.934Z",
+        "reason": "User confirmed: semantic highlighter-yellow for mark.hl"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fff8e1",
+        "createdAt": "2026-08-13T09:04:44.058Z",
+        "reason": "User confirmed: pending status badge background"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#ffe082",
+        "createdAt": "2026-08-13T09:04:44.168Z",
+        "reason": "User confirmed: pending status badge border"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#7a6000",
+        "createdAt": "2026-08-13T09:04:44.284Z",
+        "reason": "User confirmed: pending status badge text"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#e8f5e9",
+        "createdAt": "2026-08-13T09:04:44.401Z",
+        "reason": "User confirmed: approved status badge background"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#a5d6a7",
+        "createdAt": "2026-08-13T09:04:44.525Z",
+        "reason": "User confirmed: approved status badge border"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#1b5e20",
+        "createdAt": "2026-08-13T09:04:44.634Z",
+        "reason": "User confirmed: approved status badge text"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#fce4ec",
+        "createdAt": "2026-08-13T09:04:44.751Z",
+        "reason": "User confirmed: declined status badge background"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#f48fb1",
+        "createdAt": "2026-08-13T09:04:44.868Z",
+        "reason": "User confirmed: declined status badge border"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "#880e4f",
+        "createdAt": "2026-08-13T09:04:44.981Z",
+        "reason": "User confirmed: declined status badge text"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": ["reform-school/components/admin/ImageUploader.tsx"],
+        "createdAt": "2026-08-13T00:00:00.000Z",
+        "reason": "Dynamic src from Supabase Storage public URL set at upload time — not a placeholder"
       }
     ]
   }

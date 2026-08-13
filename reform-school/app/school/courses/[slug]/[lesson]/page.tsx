@@ -5,6 +5,7 @@ import ProgressButton from '@/components/ProgressButton';
 import PersonalNotes from '@/components/PersonalNotes';
 import Comments, { type CommentRow } from '@/components/Comments';
 import Highlighter from '@/components/Highlighter';
+import { youTubeId, youTubeEmbedUrl } from '@/lib/youtube';
 
 type Course = { id: string; slug: string; title: string; access: string };
 type LessonNav = { id: string; slug: string; title: string; sort_order: number };
@@ -102,6 +103,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const next = idx >= 0 && idx < lessons.length - 1 ? lessons[idx + 1] : null;
   const hasNotes = !!current.notes?.trim();
   const notesIsHtml = current.notes?.trimStart().startsWith('<');
+  const videoId = youTubeId(current.video_url);
 
   return (
     <div className="lesson-shell">
@@ -111,6 +113,17 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
         </div>
 
         <h1>{current.title}</h1>
+
+        {videoId && (
+          <div className="lesson-video">
+            <iframe
+              src={youTubeEmbedUrl(videoId)}
+              title={current.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        )}
 
         {hasNotes && (
           <>
