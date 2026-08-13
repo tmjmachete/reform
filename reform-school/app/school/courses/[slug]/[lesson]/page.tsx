@@ -102,7 +102,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const prev = idx > 0 ? lessons[idx - 1] : null;
   const next = idx >= 0 && idx < lessons.length - 1 ? lessons[idx + 1] : null;
   const hasNotes = !!current.notes?.trim();
-  const notesIsHtml = current.notes?.trimStart().startsWith('<');
+  const notesIsHtml = /<[a-z][\s\S]*>/i.test(current.notes ?? '');
   const videoId = youTubeId(current.video_url);
 
   return (
