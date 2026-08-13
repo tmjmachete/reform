@@ -752,3 +752,85 @@ mark.hl {
 .req-notes-form { display: flex; gap: var(--sm); flex: 1; min-width: 220px; }
 .req-notes-input { flex: 1; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 8px 12px; font-family: 'Libre Franklin', sans-serif; font-size: var(--body-md); color: var(--ink); }
 .req-notes-input:focus { outline: none; border-color: var(--ink); }
+
+/* ════════ community feed ════════ */
+.community-bar { display: flex; justify-content: space-between; align-items: center; gap: var(--md); margin-bottom: var(--xl); flex-wrap: wrap; }
+.community-tabs { display: flex; gap: 0; border: 1px solid var(--hairline); border-radius: var(--r-sm); overflow: hidden; }
+.ctab { font-size: var(--body-md); font-weight: 500; padding: 8px 18px; color: var(--body); transition: background 0.15s, color 0.15s; }
+.ctab:hover { background: var(--surface-soft); color: var(--ink); }
+.ctab.active { background: var(--ink); color: var(--on-dark); }
+
+.feed { display: flex; flex-direction: column; gap: var(--sm); }
+.feed-card {
+  display: block; border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--md) var(--lg);
+  background: var(--canvas); transition: border-color 0.15s, box-shadow 0.15s;
+}
+.feed-card:hover { border-color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.feed-card-post { border-left: 3px solid var(--ink); }
+.feed-meta { display: flex; align-items: center; gap: var(--xs); margin-bottom: 4px; }
+.feed-author { font-size: var(--caption); font-weight: 500; color: var(--ink); }
+.feed-time { font-size: var(--caption); color: var(--muted); }
+.feed-tag { font-size: var(--legal); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-left: auto; }
+.feed-context { font-size: var(--body-md); color: var(--muted); margin-bottom: 4px; }
+.feed-context strong { color: var(--ink); }
+.feed-course { color: var(--muted); }
+.feed-title { font-size: var(--title-sm); font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.feed-body { font-size: var(--body-md); color: var(--body); line-height: 1.5; }
+
+/* forum new post form */
+.forum-new-form { display: flex; flex-direction: column; gap: var(--md); max-width: 640px; margin-bottom: var(--xl); }
+.forum-form-actions { display: flex; gap: var(--sm); }
+
+/* forum post page */
+.post-back { font-size: var(--body-md); color: var(--on-dark); opacity: 0.7; margin-bottom: var(--sm); display: inline-block; }
+.post-back:hover { opacity: 1; }
+.forum-post-body { background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--xl); margin-bottom: var(--xl); }
+.forum-post-body .cm-meta { display: flex; align-items: center; gap: var(--xs); }
+
+/* ask / Q&A list */
+.qa-list { display: flex; flex-direction: column; gap: var(--sm); }
+.qa-card {
+  display: block; border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--md) var(--lg);
+  background: var(--canvas); transition: border-color 0.15s;
+}
+.qa-card:hover { border-color: var(--ink); }
+.qa-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--md); margin-bottom: var(--xs); }
+.qa-title { font-size: var(--title-sm); font-weight: 500; color: var(--ink); }
+.qa-replies { font-size: var(--caption); color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.qa-body { font-size: var(--body-md); color: var(--body); margin-bottom: var(--xs); }
+.qa-foot { display: flex; gap: var(--sm); font-size: var(--caption); color: var(--muted); }
+
+/* admin community */
+.admin-hidden-item { opacity: 0.55; }
+.admin-replies-detail { margin-top: var(--md); border-top: 1px solid var(--hairline); padding-top: var(--md); }
+.admin-replies-summary { font-size: var(--body-md); font-weight: 500; color: var(--body); cursor: pointer; }
+.admin-replies-list { display: flex; flex-direction: column; gap: var(--sm); margin-top: var(--sm); }
+.admin-reply { background: var(--surface-soft); border-radius: var(--r-sm); padding: var(--sm) var(--md); }
+.admin-reply-author { font-size: var(--caption); font-weight: 500; color: var(--muted); display: block; margin-bottom: 4px; }
+
+/* ════════ direct messages ════════ */
+.dm-thread { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+.dm-header { padding: var(--md) var(--lg); border-bottom: 1px solid var(--hairline); background: var(--surface-soft); }
+.dm-with { font-size: var(--body-md); font-weight: 500; color: var(--ink); }
+.dm-messages { display: flex; flex-direction: column; gap: var(--sm); padding: var(--lg); min-height: 240px; max-height: 480px; overflow-y: auto; background: var(--canvas); }
+.dm-msg { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.dm-msg.dm-mine { align-items: flex-end; }
+.dm-bubble {
+  max-width: 72%; background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: var(--r-md);
+  padding: 10px 14px; font-size: var(--body-md); color: var(--ink); line-height: 1.5; white-space: pre-wrap;
+}
+.dm-mine .dm-bubble { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+.dm-time { font-size: var(--legal); color: var(--muted); }
+.dm-compose { display: flex; gap: var(--sm); padding: var(--md) var(--lg); border-top: 1px solid var(--hairline); background: var(--canvas); align-items: flex-end; }
+.dm-input { flex: 1; background: var(--surface-soft); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 10px 14px; font-family: 'Libre Franklin', sans-serif; font-size: var(--body-md); color: var(--ink); resize: none; }
+.dm-input:focus { outline: none; border-color: var(--ink); }
+
+/* admin messages list */
+.dm-admin-list { display: flex; flex-direction: column; gap: var(--md); }
+.dm-admin-convo { border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; background: var(--canvas); }
+.dm-admin-summary { display: flex; align-items: baseline; gap: var(--md); padding: var(--md) var(--lg); cursor: pointer; background: var(--surface-soft); flex-wrap: wrap; }
+.dm-admin-summary:hover { background: var(--hairline); }
+.dm-admin-name { font-weight: 500; color: var(--ink); font-size: var(--body-md); flex-shrink: 0; }
+.dm-admin-preview { font-size: var(--body-md); color: var(--muted); flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.dm-admin-count { font-size: var(--caption); color: var(--muted); flex-shrink: 0; }
+.dm-admin-thread { padding: var(--lg); border-top: 1px solid var(--hairline); }

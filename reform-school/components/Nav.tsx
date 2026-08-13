@@ -69,6 +69,8 @@ export default function Nav() {
           {links}
           {user ? (
             <>
+              <Link href="/school/community" className={is('/school/community') ? 'active' : undefined}>Community</Link>
+              <Link href="/school/messages" className={is('/school/messages') ? 'active' : undefined}>Messages</Link>
               {isAdmin && (
                 <Link href="/school/admin" className={is('/school/admin') ? 'active' : undefined}>Admin</Link>
               )}
@@ -94,6 +96,8 @@ export default function Nav() {
         {links}
         {user ? (
           <>
+            <Link href="/school/community">Community</Link>
+            <Link href="/school/messages">Messages</Link>
             {isAdmin && <Link href="/school/admin">Admin panel</Link>}
             <Link href="/school/account">{firstName} — Account</Link>
             <a role="button" tabIndex={0} onClick={signOut}>Sign out</a>

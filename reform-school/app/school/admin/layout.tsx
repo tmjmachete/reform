@@ -12,6 +12,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <nav className="admin-nav">
           <Link href="/school/admin">Courses</Link>
           <Link href="/school/admin/sessions">Live sessions</Link>
+          <Link href="/school/admin/community">Community</Link>
+          <Link href="/school/admin/messages">Messages</Link>
           <Link href="/school/admin/comments">Comments</Link>
           <Link href="/school/admin/requests">Requests</Link>
           <Link href="/school/admin/users">Users</Link>

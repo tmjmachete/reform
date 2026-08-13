@@ -179,6 +179,32 @@ export async function setUserRole(formData: FormData) {
   revalidatePath('/school/admin/users');
 }
 
+/* ── forum moderation ── */
+export async function setForumPostHidden(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const hidden = str(formData, 'hidden') === '1';
+  await supabase.from('forum_posts').update({ is_hidden: hidden } as never).eq('id', str(formData, 'id'));
+  revalidatePath('/school/admin/community');
+  revalidatePath('/school/community');
+}
+
+export async function deleteForumPost(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  await supabase.from('forum_posts').delete().eq('id', str(formData, 'id'));
+  revalidatePath('/school/admin/community');
+  revalidatePath('/school/community');
+  redirect('/school/admin/community');
+}
+
+export async function setForumReplyHidden(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const hidden = str(formData, 'hidden') === '1';
+  await supabase.from('forum_replies').update({ is_hidden: hidden } as never).eq('id', str(formData, 'id'));
+  revalidatePath('/school/admin/community');
+  const postId = str(formData, 'post_id');
+  if (postId) revalidatePath(`/school/community/post/${postId}`);
+}
+
 /* ── comment moderation ── */
 export async function setCommentHidden(formData: FormData) {
   const { supabase } = await requireAdmin();

@@ -12,6 +12,116 @@ export type Database = {
   }
   public: {
     Tables: {
+      forum_posts: {
+        Row: {
+          id: string
+          user_id: string
+          author_name: string | null
+          author_avatar: string | null
+          type: string
+          title: string
+          body: string
+          is_pinned: boolean
+          is_hidden: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          author_name?: string | null
+          author_avatar?: string | null
+          type?: string
+          title: string
+          body: string
+          is_pinned?: boolean
+          is_hidden?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          author_name?: string | null
+          author_avatar?: string | null
+          type?: string
+          title?: string
+          body?: string
+          is_pinned?: boolean
+          is_hidden?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      forum_replies: {
+        Row: {
+          id: string
+          post_id: string
+          user_id: string
+          author_name: string | null
+          author_avatar: string | null
+          body: string
+          is_hidden: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          post_id: string
+          user_id: string
+          author_name?: string | null
+          author_avatar?: string | null
+          body: string
+          is_hidden?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          post_id?: string
+          user_id?: string
+          author_name?: string | null
+          author_avatar?: string | null
+          body?: string
+          is_hidden?: boolean
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_replies_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      direct_messages: {
+        Row: {
+          id: string
+          sender_id: string
+          recipient_id: string
+          body: string
+          is_read: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          sender_id: string
+          recipient_id: string
+          body: string
+          is_read?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          sender_id?: string
+          recipient_id?: string
+          body?: string
+          is_read?: boolean
+          created_at?: string
+        }
+        Relationships: []
+      }
       highlights: {
         Row: {
           id: string
