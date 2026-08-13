@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import postsData from '@/content/journal/index.json';
 import { createClient } from '@/lib/supabase/server';
 import Comments, { type CommentRow } from '@/components/Comments';
+import Highlighter from '@/components/Highlighter';
 
 export const dynamic = 'force-dynamic';
 
@@ -75,7 +76,9 @@ export default async function JournalPost({ params }: { params: Promise<{ slug: 
         </div>
       )}
 
-      <article className="post-prose" dangerouslySetInnerHTML={{ __html: body }} />
+      <Highlighter targetType="journal" targetId={slug} signedIn={!!user}>
+        <article className="post-prose" dangerouslySetInnerHTML={{ __html: body }} />
+      </Highlighter>
 
       <div className="post-foot">
         <hr className="admin-hr" />

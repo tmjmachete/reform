@@ -674,3 +674,81 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
   .fi { flex-direction: column; }
   .fr { gap: var(--xl); }
 }
+
+/* ════════ text highlights ════════ */
+mark.hl {
+  background: #f5e46a;
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.highlight-btn {
+  z-index: 200;
+  background: var(--ink);
+  color: var(--on-dark);
+  border: none;
+  border-radius: var(--r-sm);
+  padding: 6px 14px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: var(--caption);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  white-space: nowrap;
+}
+.highlight-btn:hover { background: #1a1a1a; }
+.highlight-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* ════════ session request form ════════ */
+.req-form-wrap { max-width: 640px; }
+.req-form { display: flex; flex-direction: column; gap: var(--md); }
+.req-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--md); }
+.req-label { display: flex; flex-direction: column; gap: 6px; font-size: var(--body-md); font-weight: 500; color: var(--ink); }
+.req-label span[aria-hidden] { color: var(--coral); }
+.req-input {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: var(--body-md);
+  color: var(--ink);
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.req-input:focus { outline: none; border-color: var(--ink); }
+.req-textarea { resize: vertical; min-height: 100px; }
+.req-error { font-size: var(--body-md); color: var(--coral); }
+.req-success {
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: var(--xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sm);
+}
+.req-success h3 { font-size: var(--title-md); margin: 0; }
+.req-success p { color: var(--body); margin: 0; }
+@media (max-width: 600px) { .req-form-row { grid-template-columns: 1fr; } }
+
+/* ════════ admin: session requests ════════ */
+.req-list { display: flex; flex-direction: column; gap: var(--md); }
+.req-card { border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--lg); background: var(--canvas); }
+.req-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--md); margin-bottom: var(--sm); flex-wrap: wrap; }
+.req-head strong { display: block; color: var(--ink); }
+.req-email { font-size: var(--body-md); color: var(--body); display: block; }
+.req-meta { display: flex; align-items: center; gap: var(--sm); flex-wrap: wrap; }
+.req-date { font-size: var(--caption); color: var(--muted); }
+.req-badge { font-size: var(--caption); font-weight: 500; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--hairline); }
+.req-pending { background: #fff8e1; border-color: #ffe082; color: #7a6000; }
+.req-approved { background: #e8f5e9; border-color: #a5d6a7; color: #1b5e20; }
+.req-declined { background: #fce4ec; border-color: #f48fb1; color: #880e4f; }
+.req-topic { font-size: var(--body-md); color: var(--ink); margin: var(--xs) 0 0; }
+.req-message { font-size: var(--body-md); color: var(--body); margin: var(--xs) 0 0; white-space: pre-wrap; }
+.req-notes-view { font-size: var(--body-md); color: var(--muted); margin: var(--xs) 0 0; }
+.req-actions { display: flex; gap: var(--sm); align-items: center; flex-wrap: wrap; margin-top: var(--md); padding-top: var(--md); border-top: 1px solid var(--hairline); }
+.req-notes-form { display: flex; gap: var(--sm); flex: 1; min-width: 220px; }
+.req-notes-input { flex: 1; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 8px 12px; font-family: 'Libre Franklin', sans-serif; font-size: var(--body-md); color: var(--ink); }
+.req-notes-input:focus { outline: none; border-color: var(--ink); }

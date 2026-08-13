@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import LocalTime from '@/components/LocalTime';
+import SessionRequestForm from './SessionRequestForm';
 
 export const metadata = {
   title: 'Live sessions — re:form School',
@@ -85,6 +86,16 @@ export default async function SessionsPage() {
             </div>
           </>
         )}
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="section-head">
+          <h2>Request a session</h2>
+          <p>Have a topic you'd like us to cover? Send a request and we'll do our best to schedule it.</p>
+        </div>
+        <div className="req-form-wrap">
+          <SessionRequestForm />
+        </div>
       </section>
     </main>
   );

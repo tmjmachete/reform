@@ -151,6 +151,24 @@ export async function deleteSession(formData: FormData) {
   redirect('/school/admin/sessions');
 }
 
+/* ── session requests ── */
+export async function updateRequestStatus(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = str(formData, 'id');
+  const status = str(formData, 'status');
+  if (!['pending', 'approved', 'declined'].includes(status)) throw new Error('Invalid status');
+  await supabase.from('session_requests').update({ status } as never).eq('id', id);
+  revalidatePath('/school/admin/requests');
+}
+
+export async function saveAdminNotes(formData: FormData) {
+  const { supabase } = await requireAdmin();
+  const id = str(formData, 'id');
+  const admin_notes = nullable(formData, 'admin_notes');
+  await supabase.from('session_requests').update({ admin_notes } as never).eq('id', id);
+  revalidatePath('/school/admin/requests');
+}
+
 /* ── user roles ── */
 export async function setUserRole(formData: FormData) {
   const { supabase } = await requireAdmin();

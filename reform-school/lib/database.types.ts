@@ -12,6 +12,78 @@ export type Database = {
   }
   public: {
     Tables: {
+      highlights: {
+        Row: {
+          id: string
+          user_id: string
+          target_type: string
+          target_id: string
+          start_offset: number
+          end_offset: number
+          highlighted_text: string
+          color: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          target_type: string
+          target_id: string
+          start_offset: number
+          end_offset: number
+          highlighted_text: string
+          color?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          target_type?: string
+          target_id?: string
+          start_offset?: number
+          end_offset?: number
+          highlighted_text?: string
+          color?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      session_requests: {
+        Row: {
+          id: string
+          user_id: string | null
+          name: string
+          email: string
+          topic: string
+          message: string | null
+          status: string
+          admin_notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id?: string | null
+          name: string
+          email: string
+          topic: string
+          message?: string | null
+          status?: string
+          admin_notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string | null
+          name?: string
+          email?: string
+          topic?: string
+          message?: string | null
+          status?: string
+          admin_notes?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
       comments: {
         Row: {
           author_avatar: string | null
