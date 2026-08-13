@@ -1,4 +1,7 @@
 ﻿import Link from 'next/link';
+import { createClient } from '@/lib/supabase/server';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'School — Study the Word, deeply',
@@ -33,7 +36,11 @@ const features = [
   { k: '06', h: 'Live sessions', p: "Join scheduled live studies and Q&A — see what's coming up on the calendar.", s: 's-canvas', href: '/school/courses', soon: true },
 ];
 
-export default function SchoolLanding() {
+export default async function SchoolLanding() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const signedIn = !!user;
+
   return (
     <main>
       {/* ── HERO (white canvas, no gradient) ── */}
@@ -48,7 +55,11 @@ export default function SchoolLanding() {
           </p>
           <div className="hero-actions fu4">
             <Link href="/school/courses" className="btn btn-primary">Browse courses</Link>
-            <Link href="/school/login" className="btn btn-secondary">Sign in with Google</Link>
+            {signedIn ? (
+              <Link href="/school/profile" className="btn btn-secondary">My progress →</Link>
+            ) : (
+              <Link href="/school/login" className="btn btn-secondary">Sign in with Google</Link>
+            )}
           </div>
         </div>
       </section>
@@ -157,7 +168,11 @@ export default function SchoolLanding() {
           <span className="label">Open the Word</span>
           <h2>Your first lesson is waiting.</h2>
           <p>Join free and begin a study today — wherever you are on the road back to God.</p>
-          <Link href="/school/login" className="btn btn-on-dark">Get started</Link>
+          {signedIn ? (
+            <Link href="/school/courses" className="btn btn-on-dark">Continue studying</Link>
+          ) : (
+            <Link href="/school/login" className="btn btn-on-dark">Get started</Link>
+          )}
         </div>
       </section>
 
