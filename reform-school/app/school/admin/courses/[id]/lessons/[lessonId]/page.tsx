@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import LessonForm from '@/components/admin/LessonForm';
-import ImageUploader from '@/components/admin/ImageUploader';
 import { addResource, deleteLesson, deleteResource } from '@/app/school/admin/actions';
 
 type Lesson = {
@@ -50,14 +49,6 @@ export default async function EditLessonPage({
       </div>
       <h1>Edit lesson</h1>
       <LessonForm lesson={lesson} />
-
-      <hr className="admin-hr" />
-
-      <h2>Images</h2>
-      <p className="admin-muted" style={{ marginBottom: 'var(--md)' }}>
-        Upload images for this lesson. After uploading, click <strong>Copy &lt;img&gt; tag</strong> and paste it into the Study notes HTML above.
-      </p>
-      <ImageUploader lessonId={lessonId} />
 
       <hr className="admin-hr" />
 

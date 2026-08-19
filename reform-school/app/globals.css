@@ -915,3 +915,68 @@ mark.hl {
   .img-card { grid-template-columns: 1fr; }
   .img-thumb { width: 100%; height: 160px; }
 }
+
+/* ── Rich Text Editor (TipTap) ── */
+.rte-wrap {
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  overflow: hidden;
+}
+.rte-wrap:focus-within { border-color: var(--ink); }
+
+.rte-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-soft);
+  flex-wrap: wrap;
+}
+.rte-btn {
+  font-family: inherit;
+  font-size: var(--caption);
+  font-weight: 500;
+  color: var(--body);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  padding: 3px 8px;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.1s, border-color 0.1s;
+}
+.rte-btn:hover { background: var(--surface-strong); }
+.rte-btn.is-active { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+.rte-img-btn { color: var(--ink); font-weight: 600; }
+.rte-sep { width: 1px; height: 18px; background: var(--hairline); margin: 0 4px; }
+
+.rte-content { padding: 14px 16px; min-height: 260px; }
+.rte-content .ProseMirror { outline: none; font-size: var(--body-md); line-height: 1.7; color: var(--body); }
+.rte-content .ProseMirror > * + * { margin-top: 0.85em; }
+.rte-content .ProseMirror p { margin: 0; }
+.rte-content .ProseMirror h2 { font-size: var(--title-md); font-weight: 700; color: var(--ink); margin-top: 1.4em; }
+.rte-content .ProseMirror h3 { font-size: var(--title-sm); font-weight: 600; color: var(--ink); margin-top: 1.2em; }
+.rte-content .ProseMirror ul,
+.rte-content .ProseMirror ol { padding-left: 1.4em; }
+.rte-content .ProseMirror li + li { margin-top: 0.25em; }
+.rte-content .ProseMirror blockquote {
+  border-left: 3px solid var(--surface-strong);
+  padding-left: 1em;
+  color: var(--muted);
+  margin: 1em 0;
+}
+.rte-content .ProseMirror hr { border: 0; border-top: 1px solid var(--hairline); margin: 1.5em 0; }
+.rte-content .ProseMirror a { color: var(--ink); text-decoration: underline; }
+.rte-content .ProseMirror img.lesson-img {
+  display: block; max-width: 100%; border-radius: var(--r-sm);
+  border: 1px solid var(--hairline); margin: 1em 0;
+}
+.rte-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--muted);
+  pointer-events: none;
+  float: left;
+  height: 0;
+}

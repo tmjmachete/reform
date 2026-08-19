@@ -1,4 +1,8 @@
+'use client';
+
+import { useState } from 'react';
 import { saveLesson } from '@/app/school/admin/actions';
+import RichTextEditor from './RichTextEditor';
 
 type Lesson = {
   id: string;
@@ -13,6 +17,8 @@ type Lesson = {
 };
 
 export default function LessonForm({ lesson }: { lesson: Lesson }) {
+  const [notes, setNotes] = useState(lesson.notes ?? '');
+
   return (
     <form action={saveLesson} className="admin-form">
       <input type="hidden" name="id" value={lesson.id} />
@@ -26,13 +32,20 @@ export default function LessonForm({ lesson }: { lesson: Lesson }) {
         <input name="slug" defaultValue={lesson.slug} pattern="[a-z0-9-]+" required />
       </label>
       <label className="fld">
-        <span>YouTube link <em>(paste any YouTube URL — leave blank for “coming soon”)</em></span>
+        <span>YouTube link <em>(paste any YouTube URL — leave blank for "coming soon")</em></span>
         <input name="video_url" defaultValue={lesson.video_url ?? ''} placeholder="https://youtu.be/…" />
       </label>
-      <label className="fld">
+
+      <div className="fld">
         <span>Study notes</span>
-        <textarea name="notes" defaultValue={lesson.notes ?? ''} rows={8} />
-      </label>
+        <RichTextEditor
+          initialContent={lesson.notes ?? ''}
+          lessonId={lesson.id}
+          onChange={setNotes}
+        />
+        <input type="hidden" name="notes" value={notes} />
+      </div>
+
       <div className="fld-row">
         <label className="fld">
           <span>Duration (minutes)</span>

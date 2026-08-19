@@ -31,6 +31,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+function lessonBlurb(notes: string | null): string | null {
+  if (!notes?.trim()) return null;
+  const stripped = notes.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!stripped) return null;
+  return stripped.length > 160 ? stripped.slice(0, 157).trimEnd() + '…' : stripped;
+}
+
 export default async function CourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const supabase = await createClient();
@@ -87,7 +94,7 @@ export default async function CourseDetailPage({ params }: { params: Promise<{ s
                 <span className="ix">{String(i + 1).padStart(2, '0')}</span>
                 <span>
                   <span className="lt">{l.title}</span>
-                  {l.notes && <span className="ld" style={{ display: 'block' }}>{l.notes}</span>}
+                  {lessonBlurb(l.notes) && <span className="ld" style={{ display: 'block' }}>{lessonBlurb(l.notes)}</span>}
                 </span>
                 <span className="go">
                   {l.duration_minutes ? `${l.duration_minutes} min · ` : ''}Open →
