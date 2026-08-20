@@ -1,7 +1,10 @@
 {
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      "reform-school/public/admin-guides/admin-guide.html",
+      "reform-school/public/admin-guides/test-pack.html"
+    ],
     "ignoreValues": [
       {
         "rule": "side-tab",

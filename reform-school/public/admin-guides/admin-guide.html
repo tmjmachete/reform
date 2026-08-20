@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Test Guide</title>
+<style>
+  :root {
+    --ground:       #f5f2ee;
+    --surface:      #edeae5;
+    --border:       #ccc9c4;
+    --ink:          #0d0d0d;
+    --body:         #2e2e2e;
+    --muted:        #6b6b6b;
+    --accent:       #1c3a3a;
+    --accent-soft:  #e8efee;
+    --check:        #14532d;
+    --check-soft:   #f0faf4;
+    --warn-soft:    #fefce8;
+    --warn:         #713f12;
+    --code-bg:      #e5e2dd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:       #1a1816;
+      --surface:      #242220;
+      --border:       #3a3835;
+      --ink:          #f0ece6;
+      --body:         #ccc8c2;
+      --muted:        #7a7672;
+      --accent:       #2a5252;
+      --accent-soft:  #1e2f2f;
+      --check:        #4ade80;
+      --check-soft:   #0f2318;
+      --warn-soft:    #1c1600;
+      --warn:         #fbbf24;
+      --code-bg:      #2a2826;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:       #1a1816;
+    --surface:      #242220;
+    --border:       #3a3835;
+    --ink:          #f0ece6;
+    --body:         #ccc8c2;
+    --muted:        #7a7672;
+    --accent:       #2a5252;
+    --accent-soft:  #1e2f2f;
+    --check:        #4ade80;
+    --check-soft:   #0f2318;
+    --warn-soft:    #1c1600;
+    --warn:         #fbbf24;
+    --code-bg:      #2a2826;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--ground);
+    color: var(--body);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  a { color: var(--ink); }
+  a:hover { text-decoration: underline; }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 48px 24px 48px 0;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .sidebar-brand {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .sidebar-nav a:hover { color: var(--ink); }
+  .sidebar-nav a.active { color: var(--ink); background: var(--surface); }
+  .nav-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--ground);
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .sidebar-nav a.active .nav-dot,
+  .sidebar-nav a.done .nav-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .main {
+    padding: 48px 0 80px 52px;
+    max-width: 640px;
+  }
+
+  .doc-header {
+    margin-bottom: 52px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .doc-header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.25;
+    text-wrap: balance;
+    margin-bottom: 14px;
+  }
+  .doc-header .lead {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 52ch;
+    line-height: 1.6;
+  }
+
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 32px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ground);
+    background: var(--accent);
+    padding: 2px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    font-family: -apple-system, sans-serif;
+  }
+  .section h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .section-intro {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    max-width: 54ch;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .step-n {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body { font-size: 14.5px; color: var(--body); line-height: 1.6; }
+  .step-body strong { color: var(--ink); font-weight: 600; }
+  .step-body em { font-style: normal; color: var(--muted); }
+
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 12.5px;
+    background: var(--code-bg);
+    color: var(--ink);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .callout {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .callout-check {
+    background: var(--check-soft);
+    color: var(--check);
+    border: 1px solid color-mix(in srgb, var(--check) 20%, transparent);
+  }
+  .callout-note {
+    background: var(--warn-soft);
+    color: var(--warn);
+    border: 1px solid color-mix(in srgb, var(--warn) 20%, transparent);
+  }
+  .callout-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .callout-text strong { display: block; margin-bottom: 2px; }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: var(--surface); }
+  .check-item input[type="checkbox"] { display: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border);
+    background: var(--ground);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 11px;
+    color: transparent;
+  }
+  .check-item.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--ground);
+  }
+  .check-label {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.45;
+    transition: color 0.15s;
+  }
+  .check-item.checked .check-label {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--border);
+  }
+  .progress-bar-wrap {
+    margin-bottom: 14px;
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 56px; }
+
+  @media (max-width: 680px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: 32px 20px 60px; }
+    .doc-header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav class="sidebar" aria-label="Guide sections">
+    <span class="sidebar-brand">re:form School</span>
+    <ol class="sidebar-nav">
+      <li><a href="#access"><span class="nav-dot"></span>Admin access</a></li>
+      <li><a href="#create-lesson"><span class="nav-dot"></span>Create a lesson</a></li>
+      <li><a href="#rich-text"><span class="nav-dot"></span>Rich text editor</a></li>
+      <li><a href="#publish"><span class="nav-dot"></span>Publish a lesson</a></li>
+      <li><a href="#comment"><span class="nav-dot"></span>Comment as student</a></li>
+      <li><a href="#live-session"><span class="nav-dot"></span>Request a live session</a></li>
+      <li><a href="#checklist"><span class="nav-dot"></span>Final checklist</a></li>
+    </ol>
+  </nav>
+
+  <main class="main">
+    <header class="doc-header">
+      <span class="eyebrow">Admin Onboarding</span>
+      <h1>Testing the re:form School Admin Panel</h1>
+      <p class="lead">Work through each section in order. By the end you will have created, written, and published a lesson — and tested the student-facing features yourself.</p>
+    </header>
+
+    <section class="section" id="access">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Confirm your admin access</h2>
+      </div>
+      <p class="section-intro">Before anything else, make sure you can reach the admin panel and that your account has the correct role.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">Go to <code>reformpod.vercel.app/school</code> and sign in with your Google account if you are not already signed in.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Navigate to <code>/school/admin</code>. You should see the <strong>Courses</strong> list. If you see a "Not authorised" page, ask Theo to set your profile role to <code>admin</code> in the Users panel.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Confirm that the sidebar shows links for <strong>Courses, Sessions, Requests, Users, Comments</strong> and Community.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see</strong>A list of existing courses. If it is empty, that is fine — you will create content in the next step.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="create-lesson">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Create a test lesson</h2>
+      </div>
+      <p class="section-intro">Create a new lesson inside an existing course, or ask Theo which course to use as a sandbox.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">From the admin panel, click any <strong>course title</strong> to open its detail page.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Scroll to the <strong>Add lesson</strong> form at the bottom. Enter a <strong>Title</strong> (e.g. <em>Test Lesson</em>) and a <strong>Slug</strong> (e.g. <em>test-lesson</em> — lowercase, hyphens only). Leave sort order as-is.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Click <strong>Add lesson</strong>. You will be redirected to the lesson editor page automatically.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see</strong>The lesson editor with fields for Title, Slug, YouTube link, Study notes, Duration, Sort order, and a Published checkbox.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="rich-text">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Write notes with the rich text editor</h2>
+      </div>
+      <p class="section-intro">The Study notes field is now a full editor — no HTML required. Try each feature below.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">Click inside the <strong>Study notes</strong> editor area and type a paragraph of text.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Select some of your text and click <strong>B</strong> in the toolbar to make it bold. Click <strong>I</strong> for italic. Both buttons should highlight when active.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Press <kbd>Enter</kbd> twice and click <strong>H2</strong> to start a new heading. Type a heading title. Notice it renders larger.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-body">Press <kbd>Enter</kbd> again and click <strong>•—</strong> to start a bullet list. Type 2–3 items, pressing <kbd>Enter</kbd> between each.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-body">Click <strong>Insert image</strong> in the toolbar. Pick any image from your computer. Wait a moment — the image should upload to Supabase Storage and appear inline in the editor.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">6</div>
+          <div class="step-body">Click <strong>Save lesson</strong> at the bottom of the form.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see after saving</strong>The page reloads and your formatted content is still there. The image appears full-width, rounded, with a subtle border.</div>
+      </div>
+      <div class="callout callout-note" style="margin-top: 10px;">
+        <span class="callout-icon">!</span>
+        <div class="callout-text"><strong>Image size limit</strong>Files must be under 10 MB. JPEG, PNG, and WebP are all accepted.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="publish">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Publish the lesson</h2>
+      </div>
+      <p class="section-intro">Lessons are hidden from students until you toggle Published. This lets you draft and review before anything goes live.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">In the lesson editor, scroll down to the <strong>Published</strong> checkbox and tick it.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Click <strong>Save lesson</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Open a new browser tab and go to <code>/school/courses/[course-slug]/test-lesson</code> — substituting the actual course slug. You should see the lesson exactly as a student would.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-body">Scroll down and click <strong>Mark complete</strong> to test the progress button. The button should change to <em>Completed ✓</em>.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see</strong>Your formatted notes, the image, and the Next/Previous navigation if other lessons exist in the course.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="comment">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Comment as a student</h2>
+      </div>
+      <p class="section-intro">Students can discuss lessons in the comments section at the bottom of each lesson page. Test the full flow here.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">On the published lesson page, scroll past the notes to the <strong>Discussion</strong> section.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Type a comment in the text box and click <strong>Post</strong>. It should appear immediately below with your name and avatar.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Click <strong>Reply</strong> on your own comment and post a reply. The reply should appear nested under the parent comment.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-body">In the admin panel, go to <code>/school/admin/comments</code> and confirm your test comment appears there. You can hide or delete it from that page.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see</strong>Comments appear instantly, with threaded replies. The admin comments page shows them with moderation controls.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="live-session">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>Request a live session</h2>
+      </div>
+      <p class="section-intro">Students can request live Q&amp;A sessions. Test both the student-facing request form and the admin review queue.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">1</div>
+          <div class="step-body">Go to <code>/school/sessions</code> — the student-facing sessions page. Click <strong>Request a session</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">2</div>
+          <div class="step-body">Fill in the request form: choose a course, describe your topic, and submit.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">3</div>
+          <div class="step-body">Switch to the admin panel and go to <code>/school/admin/requests</code>. Your request should be listed with status <strong>Pending</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">4</div>
+          <div class="step-body">Click <strong>Approve</strong> or <strong>Decline</strong> on the request. Optionally, add an admin note and save it.</div>
+        </div>
+        <div class="step">
+          <div class="step-n">5</div>
+          <div class="step-body"><em>(Optional)</em> Create a scheduled session at <code>/school/admin/sessions</code> — set a title, date, and a Zoom or Google Meet link. Publish it and confirm it appears on <code>/school/sessions</code>.</div>
+        </div>
+      </div>
+      <div class="callout callout-check">
+        <span class="callout-icon">✓</span>
+        <div class="callout-text"><strong>What you should see</strong>The request moves from Pending to Approved/Declined in the admin requests view. Approved sessions with a join link show a button on the student sessions page.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="section" id="checklist">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>Final checklist</h2>
+      </div>
+      <p class="section-intro">Tick each item as you complete it. All green means you are ready to publish real lessons.</p>
+
+      <div class="progress-label" id="progress-label">0 of 10 complete</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
+
+      <div class="checklist" id="checklist">
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I can access <code>/school/admin</code> without a permissions error</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I created a new lesson inside an existing course</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I typed and formatted notes using the rich text editor (bold, heading, list)</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I uploaded an image from the toolbar and it appeared inline</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I saved the lesson and the content persisted after reload</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I published the lesson and confirmed it is visible on the public URL</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I clicked "Mark complete" on the lesson and saw it update</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I posted a comment and a reply on the lesson page</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I submitted a live session request and reviewed it in the admin panel</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" />
+          <span class="check-box">✓</span>
+          <span class="check-label">I approved or declined the request and added an admin note</span>
+        </label>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  const checklist = document.getElementById('checklist');
+  const bar = document.getElementById('progress-bar');
+  const label = document.getElementById('progress-label');
+  const items = checklist.querySelectorAll('.check-item');
+  const total = items.length;
+
+  function updateProgress() {
+    const done = checklist.querySelectorAll('.check-item.checked').length;
+    bar.style.width = (done / total * 100) + '%';
+    label.textContent = done + ' of ' + total + ' complete';
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('checked');
+      const cb = item.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      updateProgress();
+
+      const checkLink = document.querySelector('.sidebar-nav a[href="#checklist"]');
+      const allDone = checklist.querySelectorAll('.check-item.checked').length === total;
+      if (allDone) checkLink.classList.add('done');
+    });
+  });
+</script>
+</body>
+</html>

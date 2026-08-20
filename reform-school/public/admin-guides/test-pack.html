@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>re:form School — Phase 4 Test Pack</title>
+<style>
+:root {
+  --ground: #f5f2ee;
+  --ink: #0d0d0d;
+  --body-color: #2e2b28;
+  --muted: #7a7470;
+  --hairline: #dedad5;
+  --surface: #ece9e4;
+  --lift: #faf8f5;
+  --coral: #b84032;
+  --coral-soft: rgba(184,64,50,0.08);
+  --pass-bg: #eaf3ea; --pass-fg: #1b5e20;
+  --fail-bg: #fce4ec; --fail-fg: #880e4f;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  --max: 860px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #19170f; --ink: #f0ede8; --body-color: #c4c0b8;
+    --muted: #7a7470; --hairline: #2e2b26; --surface: #221f18; --lift: #2a271f;
+    --coral: #e06050; --coral-soft: rgba(224,96,80,0.1);
+    --pass-bg: #1a2d1a; --pass-fg: #a5d6a7;
+    --fail-bg: #2d1a1f; --fail-fg: #f48fb1;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #19170f; --ink: #f0ede8; --body-color: #c4c0b8;
+  --muted: #7a7470; --hairline: #2e2b26; --surface: #221f18; --lift: #2a271f;
+  --coral: #e06050; --coral-soft: rgba(224,96,80,0.1);
+  --pass-bg: #1a2d1a; --pass-fg: #a5d6a7;
+  --fail-bg: #2d1a1f; --fail-fg: #f48fb1;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--ground);
+  color: var(--body-color);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-bottom: 80px;
+}
+
+.doc-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink); color: var(--ground);
+  padding: 14px 28px;
+  display: flex; align-items: center; gap: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.doc-wordmark {
+  font-family: var(--serif); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.45; white-space: nowrap;
+}
+.doc-title-wrap { flex: 1; text-align: center; }
+.doc-title {
+  font-family: var(--serif); font-size: 15px; font-weight: normal;
+  color: rgba(240,237,232,0.9);
+}
+.doc-progress-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; white-space: nowrap; }
+.doc-progress-label { font-size: 11px; color: rgba(240,237,232,0.5); font-variant-numeric: tabular-nums; }
+.doc-progress-label strong { color: rgba(240,237,232,0.9); }
+.hdr-bar { width: 120px; height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+.hdr-bar-fill { height: 100%; background: var(--coral); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+
+.intro {
+  padding: 52px 0 40px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 52px;
+}
+.intro-eye {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--coral); margin-bottom: 12px; display: block;
+}
+.intro h1 {
+  font-family: var(--serif); font-size: 36px; font-weight: normal;
+  color: var(--ink); line-height: 1.2; text-wrap: balance; margin-bottom: 14px;
+}
+.intro-lead { font-size: 15px; color: var(--muted); max-width: 54ch; line-height: 1.75; }
+.intro-meta {
+  margin-top: 28px; display: flex; gap: 28px; flex-wrap: wrap;
+  font-size: 12px; color: var(--muted);
+}
+.intro-meta strong { color: var(--ink); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+
+.prog-strip {
+  background: var(--surface); border-radius: 8px; padding: 20px 24px;
+  display: flex; align-items: center; gap: 24px; margin-bottom: 52px; flex-wrap: wrap;
+}
+.prog-big { font-family: var(--serif); font-size: 42px; color: var(--ink); line-height: 1; font-variant-numeric: tabular-nums; }
+.prog-big span { font-size: 18px; color: var(--muted); }
+.prog-right { flex: 1; min-width: 180px; }
+.prog-bar-track { height: 5px; background: var(--hairline); border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+.prog-bar-fill { height: 100%; background: var(--coral); border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+.prog-counts { display: flex; gap: 16px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.prog-passed { color: #1b7a1b; font-weight: 600; }
+.prog-remain { color: var(--muted); }
+
+.batch { margin-bottom: 60px; }
+.batch-head {
+  display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px;
+  padding-bottom: 14px; border-bottom: 2px solid var(--ink);
+}
+.batch-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--coral);
+}
+.batch-name { font-family: var(--serif); font-size: 21px; font-weight: normal; color: var(--ink); }
+.batch-scope { margin-left: auto; font-size: 11px; color: var(--muted); }
+.batch-desc { font-size: 13px; color: var(--muted); margin-bottom: 24px; margin-top: 10px; max-width: 60ch; line-height: 1.6; }
+
+.tests { display: flex; flex-direction: column; }
+.test {
+  display: grid; grid-template-columns: 52px 1fr;
+  gap: 0 16px; padding: 20px 0;
+  border-bottom: 1px solid var(--hairline);
+  transition: background 0.15s;
+}
+.test:last-child { border-bottom: none; }
+.test:has(.tc:checked) { background: var(--coral-soft); border-radius: 6px; padding-inline: 8px; margin-inline: -8px; }
+
+.test-lhs { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 2px; }
+.tc {
+  width: 18px; height: 18px; cursor: pointer; accent-color: var(--coral); flex-shrink: 0;
+  border-radius: 3px;
+}
+.tid {
+  font-size: 10px; color: var(--muted); font-variant-numeric: tabular-nums;
+  font-weight: 600; letter-spacing: 0.04em;
+}
+.test:has(.tc:checked) .tid { color: var(--coral); }
+
+.test-tag {
+  display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 99px;
+  border: 1px solid var(--hairline); color: var(--muted); margin-bottom: 7px;
+  background: var(--lift);
+}
+.test-name {
+  font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 10px;
+  line-height: 1.4;
+}
+.test:has(.tc:checked) .test-name { text-decoration: line-through; opacity: 0.45; }
+.test:has(.tc:checked) .test-steps-wrap { opacity: 0.4; }
+
+.test-steps-wrap { margin-bottom: 10px; }
+.test-steps {
+  list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 4px;
+}
+.test-steps li { font-size: 13px; color: var(--body-color); line-height: 1.5; display: flex; gap: 10px; align-items: baseline; }
+.test-steps li::before {
+  counter-increment: step; content: counter(step);
+  font-size: 10px; font-weight: 700; color: var(--muted); min-width: 16px; text-align: right;
+  font-variant-numeric: tabular-nums; flex-shrink: 0; line-height: 1.8;
+}
+.test-url { font-size: 12px; font-family: 'Courier New', monospace; background: var(--surface); padding: 1px 6px; border-radius: 3px; color: var(--coral); }
+
+.test-expect {
+  font-size: 12.5px; color: var(--muted); padding: 8px 12px; margin-top: 4px;
+  border-left: 2px solid var(--coral); background: var(--coral-soft); border-radius: 0 4px 4px 0;
+  line-height: 1.55;
+}
+.test-expect strong { color: var(--coral); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 2px; }
+
+.test-note-wrap { margin-top: 10px; display: none; }
+.test:has(.tc:checked) .test-note-wrap { display: block; }
+.test-note {
+  width: 100%; font-size: 12px; font-family: var(--sans); resize: vertical; min-height: 52px;
+  background: var(--ground); border: 1px solid var(--hairline); border-radius: 4px;
+  padding: 8px 10px; color: var(--ink); line-height: 1.5;
+}
+.test-note::placeholder { color: var(--muted); }
+.test-note:focus { outline: none; border-color: var(--coral); }
+
+.test-admin { font-size: 11px; color: var(--muted); padding: 5px 10px; border-radius: 4px; background: var(--surface); display: inline-block; margin-top: 6px; }
+
+.doc-foot { max-width: var(--max); margin: 0 auto; padding: 32px 28px 0; border-top: 1px solid var(--hairline); font-size: 12px; color: var(--muted); }
+
+@media (max-width: 600px) {
+  .doc-header { flex-wrap: wrap; gap: 10px; }
+  .doc-title-wrap { order: -1; width: 100%; text-align: left; }
+  .test { grid-template-columns: 1fr; }
+  .test-lhs { flex-direction: row; align-items: center; gap: 10px; margin-bottom: 8px; }
+}
+@media print {
+  .doc-header { position: static; }
+  .test-note-wrap { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <span class="doc-wordmark">re:form School</span>
+  <div class="doc-title-wrap">
+    <span class="doc-title">Phase 4 — Test Pack</span>
+  </div>
+  <div class="doc-progress-wrap">
+    <span class="doc-progress-label"><strong id="hdr-done">0</strong> / <span id="hdr-total">0</span> passed</span>
+    <div class="hdr-bar"><div class="hdr-bar-fill" id="hdr-fill"></div></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <span class="intro-eye">Quality assurance</span>
+    <h1>Phase 4 Test Pack</h1>
+    <p class="intro-lead">
+      Work through each test case on the live deployment. Check off a test when it passes.
+      If something fails, a note field opens below — log the symptom there before moving on.
+    </p>
+    <div class="intro-meta">
+      <div><strong>Environment</strong>reformpod.vercel.app</div>
+      <div><strong>Phase</strong>Batches 1 – 4 + fixes</div>
+      <div><strong>Tester</strong>Theo Machete</div>
+      <div><strong>Date</strong><span id="today"></span></div>
+    </div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-big"><span id="prog-done">0</span><span> / <span id="prog-total">0</span></span></div>
+    <div class="prog-right">
+      <div class="prog-bar-track"><div class="prog-bar-fill" id="prog-fill"></div></div>
+      <div class="prog-counts">
+        <span class="prog-passed" id="prog-passed-ct">0 passed</span>
+        <span class="prog-remain" id="prog-remain-ct">0 remaining</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BATCH 1 -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 1 + fix</span>
+      <span class="batch-name">School landing &amp; navigation</span>
+      <span class="batch-scope">5 tests</span>
+    </div>
+    <p class="batch-desc">Covers the school landing page hero CTAs and the global navigation auth-aware rendering.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t01"><label class="tid" for="t01">T-01</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Landing · Signed out</span>
+          <div class="test-name">Signed-out hero shows correct CTAs</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open an incognito/private window.</li>
+            <li>Navigate to <span class="test-url">/school</span>.</li>
+            <li>Observe the hero section buttons.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Two buttons: "Browse courses" (dark) and "Sign in with Google" (outline). No "My progress" button.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t02"><label class="tid" for="t02">T-02</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Landing · Signed in</span>
+          <div class="test-name">Signed-in hero hides "Sign in with Google", shows "My progress"</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign in with your Google account.</li>
+            <li>Navigate to <span class="test-url">/school</span>.</li>
+            <li>Observe the hero section buttons.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>"Browse courses" and "My progress →" buttons. "Sign in with Google" does not appear.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t03"><label class="tid" for="t03">T-03</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Nav · Signed in</span>
+          <div class="test-name">Signed-in nav shows Community and Messages links</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Confirm you are signed in (your name appears in nav).</li>
+            <li>Check the top navigation bar.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Nav shows: Home, Reform Journal, School, Community, Messages, Admin (if admin), [Name], Sign out.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t04"><label class="tid" for="t04">T-04</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Nav · Signed out</span>
+          <div class="test-name">Signed-out nav hides Community and Messages</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open an incognito window or sign out.</li>
+            <li>Check the top navigation bar.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Nav shows: Home, Reform Journal, School, Sign in. No Community, Messages, or Admin links.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t05"><label class="tid" for="t05">T-05</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Auth</span>
+          <div class="test-name">Google sign-in flow completes and redirects correctly</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign out if signed in. Navigate to <span class="test-url">/school/login</span>.</li>
+            <li>Click "Sign in with Google".</li>
+            <li>Complete the Google auth flow.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Redirected back to the school. Name appears in nav. No error page.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BATCH 2 -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 2</span>
+      <span class="batch-name">Course learning experience</span>
+      <span class="batch-scope">7 tests</span>
+    </div>
+    <p class="batch-desc">Lesson pages, progress tracking, personal notes, profile page, and journal comments.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t06"><label class="tid" for="t06">T-06</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Lessons</span>
+          <div class="test-name">Lesson page renders study notes and sidebar navigation</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/courses</span> and open any published course.</li>
+            <li>Open the first lesson.</li>
+            <li>Observe the layout.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Study notes section is visible. Course sidebar on the right lists all lessons. Current lesson is highlighted.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t07"><label class="tid" for="t07">T-07</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Progress</span>
+          <div class="test-name">Mark complete / incomplete toggles correctly</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open any lesson while signed in.</li>
+            <li>Click "Mark complete".</li>
+            <li>Confirm the button changes state. Refresh the page.</li>
+            <li>Click again to mark incomplete.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Button state persists after refresh. Toggling back to incomplete also persists. Sidebar shows ✓ when complete.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t08"><label class="tid" for="t08">T-08</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Notes</span>
+          <div class="test-name">Personal notes auto-save and persist across sessions</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open a lesson while signed in. Find the "My notes" textarea.</li>
+            <li>Type some text and wait 2 seconds (no submit button).</li>
+            <li>Navigate away, then return to the same lesson.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>"Saved" indicator appears briefly. Notes reappear exactly as written after returning.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t09"><label class="tid" for="t09">T-09</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Notes page</span>
+          <div class="test-name">My Notes page lists all saved notes with lesson links</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Save a note on at least one lesson.</li>
+            <li>Navigate to <span class="test-url">/school/notes</span>.</li>
+            <li>Verify the note appears with lesson and course name.</li>
+            <li>Click the lesson link on a note card.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Note cards show the note text, course name, lesson name, and date. Clicking the lesson link goes to the correct lesson page.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t10"><label class="tid" for="t10">T-10</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Profile</span>
+          <div class="test-name">Profile page shows courses with accurate progress bars</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Complete at least 1 lesson in any course.</li>
+            <li>Navigate to <span class="test-url">/school/profile</span>.</li>
+            <li>Check the progress bar for that course.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>The course appears with a progress bar showing the correct ratio (e.g., 1 of 6 lessons = ~17%). Profile redirects to login when signed out.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t11"><label class="tid" for="t11">T-11</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Journal · Comments</span>
+          <div class="test-name">Signed-in user can post a comment on a journal article</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open any journal article at <span class="test-url">/journal/[slug]</span>.</li>
+            <li>Scroll to the Discussion section.</li>
+            <li>Type a comment and click "Post comment".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Comment appears in the thread immediately. Signed-out view shows a "Sign in" prompt instead of the compose box.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t12"><label class="tid" for="t12">T-12</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin</span>
+          <div class="test-name">Admin can change a user's role (student ↔ admin)</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/admin/users</span>.</li>
+            <li>Find a user and click "Make admin" or "Make student".</li>
+            <li>Refresh the page and check the role displayed.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Role updates immediately. Persists after page refresh.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BATCH 3 -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 3</span>
+      <span class="batch-name">Highlights &amp; session requests</span>
+      <span class="batch-scope">11 tests</span>
+    </div>
+    <p class="batch-desc">Text highlighting on lessons and journal articles, and the live session request workflow end-to-end.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t13"><label class="tid" for="t13">T-13</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Highlighting</span>
+          <div class="test-name">Selecting text in a lesson shows the Highlight button</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign in and open a lesson with study notes.</li>
+            <li>Click and drag to select a sentence in the notes area.</li>
+            <li>Observe what appears near the selection.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>A small floating "✦ Highlight" button appears just above the selected text.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t14"><label class="tid" for="t14">T-14</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Highlighting</span>
+          <div class="test-name">Clicking Highlight applies yellow mark to the text</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Select text in lesson notes (signed in).</li>
+            <li>Click the "✦ Highlight" button.</li>
+            <li>Observe the selected text immediately after.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Selected text becomes highlighted in yellow. The floating button disappears. Selection is cleared.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t15"><label class="tid" for="t15">T-15</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Highlighting</span>
+          <div class="test-name">Highlights persist after page reload</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Highlight at least one passage in a lesson.</li>
+            <li>Refresh the page (F5 or Cmd+R).</li>
+            <li>Observe the notes area.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>The yellow highlight reappears on the same passage as before.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t16"><label class="tid" for="t16">T-16</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Highlighting · Journal</span>
+          <div class="test-name">Highlighting works on journal articles</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open any journal article.</li>
+            <li>Select and highlight a sentence in the article body.</li>
+            <li>Refresh the page.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Highlight applies and persists on journal articles the same as on lessons.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t17"><label class="tid" for="t17">T-17</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Highlighting · Auth</span>
+          <div class="test-name">Highlight button does not appear for signed-out users</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open an incognito window.</li>
+            <li>Open a lesson page or journal article.</li>
+            <li>Select text in the notes or article body.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>No floating highlight button appears. Selection behaves as normal browser text selection.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t18"><label class="tid" for="t18">T-18</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Sessions</span>
+          <div class="test-name">Sessions page displays upcoming and past sessions</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/sessions</span>.</li>
+            <li>Check both the "Upcoming" and "Past sessions" sections.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Page loads without error. If no sessions exist, "No sessions scheduled right now" message shows. Request form is visible below.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t19"><label class="tid" for="t19">T-19</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Session request</span>
+          <div class="test-name">Request form submits successfully and shows confirmation</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/sessions</span>.</li>
+            <li>Fill in Name, Email, Topic (Message is optional).</li>
+            <li>Click "Send request".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>"Request received. Thank you…" success state appears. Form is cleared. "Send another" button is shown.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t20"><label class="tid" for="t20">T-20</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Session request</span>
+          <div class="test-name">Request form rejects submission if required fields are empty</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/sessions</span>.</li>
+            <li>Leave Name blank. Fill in Email and Topic.</li>
+            <li>Click "Send request".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Form does not submit. Browser validation or an error message indicates which field is missing.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t21"><label class="tid" for="t21">T-21</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Requests</span>
+          <div class="test-name">Submitted request appears in admin panel</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Submit a session request from the sessions page.</li>
+            <li>Navigate to <span class="test-url">/school/admin/requests</span>.</li>
+            <li>Look for the request in the "Pending" section.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Request appears with the submitted name, email, and topic. Status badge shows "pending".</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t22"><label class="tid" for="t22">T-22</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Requests</span>
+          <div class="test-name">Approve and decline buttons update request status</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On <span class="test-url">/school/admin/requests</span>, find a pending request.</li>
+            <li>Click "Approve". Check the badge changes to "approved".</li>
+            <li>Click "Reset to pending". Click "Decline". Check badge changes to "declined".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Status badge updates after each action. Approved/declined requests move to the "Reviewed" section.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t23"><label class="tid" for="t23">T-23</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Requests</span>
+          <div class="test-name">Admin internal notes save and display correctly</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On any request card, type a note in the "Internal notes…" field.</li>
+            <li>Click "Save note".</li>
+            <li>Refresh the page.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Note persists after refresh, shown in italics on the request card.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BATCH 4a -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 4a</span>
+      <span class="batch-name">Community forum</span>
+      <span class="batch-scope">9 tests</span>
+    </div>
+    <p class="batch-desc">The community activity feed, individual discussion threads, and the Ask the Teacher Q&amp;A section.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t24"><label class="tid" for="t24">T-24</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Community feed</span>
+          <div class="test-name">Community feed loads without errors</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign in and navigate to <span class="test-url">/school/community</span>.</li>
+            <li>Check whether lesson comments, journal comments, and forum posts appear in the feed.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Feed renders. Each card shows author, time, context (lesson name / journal title / "Discussion"), and a body excerpt.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t25"><label class="tid" for="t25">T-25</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Community feed</span>
+          <div class="test-name">"Start a discussion" button visible only when signed in</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Confirm button is visible at <span class="test-url">/school/community</span> while signed in.</li>
+            <li>Open an incognito window and visit the same page.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>"+ Start a discussion" button visible when signed in. Hidden (no button) when signed out.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t26"><label class="tid" for="t26">T-26</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Forum post</span>
+          <div class="test-name">Creating a discussion redirects to the new post thread</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Click "+ Start a discussion" on the community page.</li>
+            <li>Enter a title and body text.</li>
+            <li>Click "Post".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Redirected to <span class="test-url">/school/community/post/[id]</span>. Post title, body, and your name are displayed. Reply count shows 0.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t27"><label class="tid" for="t27">T-27</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Forum post</span>
+          <div class="test-name">New discussion appears in the community feed</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>After creating a discussion, return to <span class="test-url">/school/community</span>.</li>
+            <li>Look for your post in the feed.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Your new discussion appears at or near the top of the feed with a "Discussion" tag and dark left border.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t28"><label class="tid" for="t28">T-28</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Forum thread</span>
+          <div class="test-name">Signed-in user can reply to a forum post</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open any forum post at <span class="test-url">/school/community/post/[id]</span>.</li>
+            <li>Type a reply in the textarea at the bottom.</li>
+            <li>Click "Reply".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Reply appears in the thread immediately below existing replies. Reply count updates.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t29"><label class="tid" for="t29">T-29</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Forum thread</span>
+          <div class="test-name">Post owner can delete their own forum post</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open a forum post that you created.</li>
+            <li>Click "Delete post" and confirm the dialog.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Redirected to <span class="test-url">/school/community</span>. Deleted post no longer appears in the feed.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t30"><label class="tid" for="t30">T-30</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Ask the teacher</span>
+          <div class="test-name">Ask page lists questions with answer counts</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/community/ask</span>.</li>
+            <li>Check for any existing questions and their reply counts.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Questions listed with title, excerpt, author, date, and "N answers" count. Empty state shows if no questions exist.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t31"><label class="tid" for="t31">T-31</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Ask the teacher</span>
+          <div class="test-name">Posting a question creates a Q&amp;A type post</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Click "+ Ask a question" on the Ask page.</li>
+            <li>Enter a question title and body.</li>
+            <li>Click "Post".</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Redirected to the post page which shows "Question" label (not "Discussion"). Post appears in the Q&amp;A list on return.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t32"><label class="tid" for="t32">T-32</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Community · Feed links</span>
+          <div class="test-name">Feed cards link to the correct destination</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On <span class="test-url">/school/community</span>, click a card that says "in [Lesson] — [Course]".</li>
+            <li>Click a card that says "on [Journal title]".</li>
+            <li>Click a "Discussion" card.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Lesson comment → lesson page. Journal comment → journal article. Forum post → community post thread.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BATCH 4b -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 4b</span>
+      <span class="batch-name">Private messages</span>
+      <span class="batch-scope">5 tests</span>
+    </div>
+    <p class="batch-desc">Student ↔ admin private messaging thread, and the admin inbox view.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t33"><label class="tid" for="t33">T-33</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Messages · Auth</span>
+          <div class="test-name">Messages page redirects signed-out users to login</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Open an incognito window.</li>
+            <li>Navigate directly to <span class="test-url">/school/messages</span>.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Redirected to <span class="test-url">/school/login</span>. Messages page not accessible without authentication.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t34"><label class="tid" for="t34">T-34</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Messages</span>
+          <div class="test-name">Student can send a message and it appears in the thread</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign in and navigate to <span class="test-url">/school/messages</span>.</li>
+            <li>Type a message in the compose area.</li>
+            <li>Click "Send" (or press Enter).</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Message appears on the right side of the thread (sent bubble, dark background). Compose field clears.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t35"><label class="tid" for="t35">T-35</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Messages</span>
+          <div class="test-name">Enter key sends message; Shift+Enter adds a newline</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/messages</span>.</li>
+            <li>Type text and press Enter.</li>
+            <li>Type text and press Shift+Enter.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Enter sends the message. Shift+Enter inserts a line break without sending.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t36"><label class="tid" for="t36">T-36</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Messages</span>
+          <div class="test-name">Admin messages page shows all student conversations</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Sign in as admin. Navigate to <span class="test-url">/school/admin/messages</span>.</li>
+            <li>Check for any conversations listed as collapsible items.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Each student who has sent a message appears as a collapsible row showing their name, last message preview, and message count.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t37"><label class="tid" for="t37">T-37</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Messages</span>
+          <div class="test-name">Admin can reply to a student from the messages page</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On <span class="test-url">/school/admin/messages</span>, expand a student's conversation.</li>
+            <li>Type a reply in the compose area and click "Send".</li>
+            <li>Check that the message appears in the thread.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Admin reply appears in the thread. When the student views <span class="test-url">/school/messages</span>, the reply is visible on the left side (received bubble).</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BATCH 4c -->
+  <section class="batch">
+    <div class="batch-head">
+      <span class="batch-tag">Batch 4c</span>
+      <span class="batch-name">Admin — community moderation</span>
+      <span class="batch-scope">3 tests</span>
+    </div>
+    <p class="batch-desc">Admin tools for moderating forum posts and replies.</p>
+    <div class="tests">
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t38"><label class="tid" for="t38">T-38</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Moderation</span>
+          <div class="test-name">Admin community page lists all posts including hidden ones</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>Navigate to <span class="test-url">/school/admin/community</span>.</li>
+            <li>Check that both visible and previously hidden posts appear.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>All forum posts listed. Hidden posts appear dimmed. Counts shown in the page header (e.g., "5 visible · 1 hidden").</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t39"><label class="tid" for="t39">T-39</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Moderation</span>
+          <div class="test-name">Hiding a post removes it from the community feed</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On <span class="test-url">/school/admin/community</span>, click "Hide" on a visible post.</li>
+            <li>Navigate to <span class="test-url">/school/community</span>.</li>
+            <li>Look for the post in the feed.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Post no longer appears in the community feed. "Unhide" button now shown on the admin page.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+      <div class="test">
+        <div class="test-lhs"><input type="checkbox" class="tc" id="t40"><label class="tid" for="t40">T-40</label></div>
+        <div class="test-rhs">
+          <span class="test-tag">Admin · Moderation</span>
+          <div class="test-name">Deleting a post removes it permanently from community</div>
+          <div class="test-steps-wrap"><ol class="test-steps">
+            <li>On <span class="test-url">/school/admin/community</span>, click "Delete" on a post and confirm.</li>
+            <li>Check the admin community page and the public community feed.</li>
+          </ol></div>
+          <div class="test-expect"><strong>Expected</strong>Post is gone from both the admin page and the public community feed. Its thread URL returns a 404.</div>
+          <div class="test-note-wrap"><textarea class="test-note" placeholder="Describe what happened if this failed…"></textarea></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="doc-foot wrap">
+  re:form School · Phase 4 Test Pack · <span id="foot-date"></span> · 40 test cases
+</div>
+
+<script>
+const checkboxes = document.querySelectorAll('.tc');
+const total = checkboxes.length;
+
+function update() {
+  const done = [...checkboxes].filter(c => c.checked).length;
+  const pct = total > 0 ? (done / total * 100).toFixed(0) : 0;
+
+  document.getElementById('hdr-done').textContent = done;
+  document.getElementById('hdr-total').textContent = total;
+  document.getElementById('hdr-fill').style.width = pct + '%';
+  document.getElementById('prog-done').textContent = done;
+  document.getElementById('prog-total').textContent = total;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-passed-ct').textContent = done + ' passed';
+  document.getElementById('prog-remain-ct').textContent = (total - done) + ' remaining';
+
+  localStorage.setItem('reform-testpack-state', JSON.stringify([...checkboxes].map(c => c.checked)));
+}
+
+try {
+  const saved = JSON.parse(localStorage.getItem('reform-testpack-state') || '[]');
+  checkboxes.forEach((c, i) => { if (saved[i]) c.checked = true; });
+} catch {}
+
+checkboxes.forEach(c => c.addEventListener('change', update));
+
+const notes = document.querySelectorAll('.test-note');
+notes.forEach((n, i) => {
+  const key = 'reform-note-' + i;
+  n.value = localStorage.getItem(key) || '';
+  n.addEventListener('input', () => localStorage.setItem(key, n.value));
+});
+
+const d = new Date();
+const dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+document.querySelectorAll('#today, #foot-date').forEach(el => el.textContent = dateStr);
+
+update();
+</script>
+
+</body>
+</html>
