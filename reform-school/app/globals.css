@@ -36,10 +36,12 @@
   --mustard: #8a8784;
 
   /* semantic */
-  --link:        #0d0d0d;
-  --link-active: #2e2e2e;
-  --success:     #2a4a2a;
-  --danger:      #6b2020;
+  --link:                   #0d0d0d;
+  --link-active:            #2e2e2e;
+  --success:                #2a4a2a;
+  --danger:                 #6b2020;
+  --status-success-surface: #e3f1e4;
+  --status-danger-surface:  #fbeae5;
 
   /* type scale (px → rem at 16px root) */
   --display-xl: 3rem;       /* 48 */
@@ -494,41 +496,42 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 
 /* ════════ admin ════════ */
 .admin { min-height: 100vh; background: var(--surface-soft); }
-.admin-bar { position: sticky; top: var(--nav-h); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: var(--md); height: 52px; padding: 0 var(--xl); background: var(--ink); color: var(--on-dark); }
-.admin-brand { font-size: var(--body-md); font-weight: 500; }
+.admin-bar { position: sticky; top: var(--nav-h); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: var(--md); height: 52px; padding: 0 var(--xl); background: var(--surface-dark-elevated); color: var(--on-dark); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.admin-brand { font-family: 'Libre Franklin', -apple-system, sans-serif; font-size: var(--caption); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-dark); }
 .admin-nav { display: flex; gap: var(--lg); }
-.admin-nav a { font-size: var(--body-md); color: rgba(255,255,255,0.75); }
+.admin-nav a { font-size: var(--caption); font-weight: 400; letter-spacing: 0.02em; color: rgba(255,255,255,0.6); transition: color 0.15s; }
 .admin-nav a:hover { color: var(--on-dark); }
 .admin-body { padding: var(--xl); }
 .admin-page { max-width: 980px; margin: 0 auto; }
 .admin-narrow { max-width: 720px; }
 .admin-head { display: flex; align-items: center; justify-content: space-between; gap: var(--md); margin: var(--lg) 0 var(--md); }
-.admin-page h1 { font-size: var(--display-md); margin-bottom: var(--md); }
-.admin-page h2 { font-size: var(--title-lg); }
-.admin-crumb { font-size: var(--caption); color: var(--muted); margin-bottom: var(--sm); }
+.admin-page h1 { font-size: var(--display-md); font-weight: 500; margin-bottom: var(--md); }
+.admin-page h2 { font-size: var(--title-lg); font-weight: 500; }
+.admin-crumb { font-size: var(--caption); font-weight: 400; letter-spacing: 0.02em; color: var(--muted); margin-bottom: var(--sm); }
 .admin-crumb a:hover { color: var(--ink); }
 .admin-muted { color: var(--muted); font-size: var(--body-md); }
-.admin-link { color: var(--link); font-weight: 500; }
+.admin-link { color: var(--ink); font-weight: 500; }
 .admin-link:hover { text-decoration: underline; }
 
-.admin-table { width: 100%; border-collapse: collapse; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+.admin-table { width: 100%; border-collapse: collapse; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-lg); overflow: hidden; }
 .admin-table th, .admin-table td { text-align: left; padding: var(--sm) var(--md); border-bottom: 1px solid var(--hairline); font-size: var(--body-md); }
 .admin-table th { font-size: var(--caption); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; background: var(--surface-soft); }
 .admin-table tr:last-child td { border-bottom: 0; }
 .admin-pill { font-size: var(--caption); font-weight: 500; padding: 2px 10px; border-radius: var(--r-pill); }
-.admin-pill.pub { background: #e3f1e4; color: var(--success); }
+.admin-pill.pub { background: var(--status-success-surface); color: var(--success); }
 .admin-pill.draft { background: var(--surface-strong); color: var(--muted); }
 
-.admin-form { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: var(--lg); display: flex; flex-direction: column; gap: var(--md); }
+.admin-form { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: var(--lg); display: flex; flex-direction: column; gap: var(--md); }
 .fld { display: flex; flex-direction: column; gap: 6px; }
-.fld > span { font-size: var(--caption); font-weight: 500; color: var(--ink); }
-.fld > span em { font-style: normal; font-weight: 400; color: var(--muted); }
+.fld > span { font-size: var(--caption); font-weight: 500; letter-spacing: 0.03em; color: var(--ink); }
+.fld > span em { font-style: normal; font-weight: 400; color: var(--muted); letter-spacing: 0; }
 .fld input, .fld select, .fld textarea, .admin-inline-form input {
   font-family: inherit; font-size: var(--body-md); color: var(--ink);
   border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 10px 12px; background: var(--canvas);
+  transition: border-color 0.15s;
 }
-.fld textarea { resize: vertical; line-height: 1.5; }
-.fld input:focus, .fld select:focus, .fld textarea:focus, .admin-inline-form input:focus { outline: none; border-color: var(--ink); }
+.fld textarea { resize: vertical; line-height: 1.6; }
+.fld input:focus, .fld select:focus, .fld textarea:focus, .admin-inline-form input:focus { outline: none; border-color: var(--border-strong); }
 .fld-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--md); }
 .chk { display: flex; align-items: center; gap: var(--xs); font-size: var(--body-md); color: var(--ink); }
 .chk span em { font-style: normal; color: var(--muted); }
@@ -539,8 +542,8 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 
 .admin-hr { border: 0; border-top: 1px solid var(--hairline); margin: var(--xl) 0; }
 .admin-danger { display: flex; align-items: center; gap: var(--md); }
-.admin-delete { font-family: inherit; font-size: var(--body-md); font-weight: 500; color: var(--coral); background: none; border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 8px 16px; cursor: pointer; }
-.admin-delete:hover { border-color: var(--coral); }
+.admin-delete { font-family: inherit; font-size: var(--body-md); font-weight: 500; color: var(--danger); background: none; border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 8px 16px; cursor: pointer; transition: border-color 0.15s; }
+.admin-delete:hover { border-color: var(--danger); }
 .admin-delete.sm { padding: 4px 10px; font-size: var(--caption); }
 @media (max-width: 560px) { .fld-row { grid-template-columns: 1fr; } }
 
