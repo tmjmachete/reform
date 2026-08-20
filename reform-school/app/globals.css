@@ -496,7 +496,7 @@ a.demo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0
 
 /* ════════ admin ════════ */
 .admin { min-height: 100vh; background: var(--surface-soft); }
-.admin-bar { position: sticky; top: var(--nav-h); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: var(--md); height: 52px; padding: 0 var(--xl); background: var(--surface-dark-elevated); color: var(--on-dark); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.admin-bar { position: sticky; top: var(--nav-h); z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: var(--md); height: 52px; padding: 0 var(--xl); background: var(--surface-dark-elevated); color: var(--on-dark); }
 .admin-brand { font-family: 'Libre Franklin', -apple-system, sans-serif; font-size: var(--caption); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--on-dark); }
 .admin-nav { display: flex; gap: var(--lg); }
 .admin-nav a { font-size: var(--caption); font-weight: 400; letter-spacing: 0.02em; color: rgba(255,255,255,0.6); transition: color 0.15s; }
